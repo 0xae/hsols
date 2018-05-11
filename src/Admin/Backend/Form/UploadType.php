@@ -29,8 +29,6 @@ class UploadType extends AbstractType {
                 )
             ))
             ->add('annexType')
-            // ->add('createdAt')
-            // ->add('createdBy')
         ;
     }
 

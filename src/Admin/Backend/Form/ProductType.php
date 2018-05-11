@@ -26,7 +26,8 @@ class ProductType extends AbstractType {
                 'label' => 'Enviar',
                 'attr' => array(
                     'class' => 'btn btn-success',
-                    'ng-click' => 'onSubmitForm()'
+                    'ng-click' => 'onSubmitForm()',
+                    'id' => 'save-product'
                 )
             ))
         ;

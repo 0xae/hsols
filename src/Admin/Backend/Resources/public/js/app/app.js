@@ -70,3 +70,29 @@ $(document).ready(function() {
 $("input[data-disabled='data-disabled'], select[data-disabled='data-disabled']").each(function (){
     $(this).attr("ng-disabled", "true");
 });
+
+
+$("#admin_backend_upload_file").on("change", function(event) {
+    $("#upload-ajax-form").submit();
+});
+
+$("#upload-ajax-form").on("submit", function(event) {
+    console.info("test");
+    event.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: $("#upload-ajax-form").attr("action"),
+        data: new FormData($(this)[0]),
+        processData: false,  
+        contentType: false,  
+        cache: false,
+
+        success: function(response) {
+            console.info(response);
+        },
+
+        error: function (response, desc, err){
+            console.error(response);
+        }
+    });
+});

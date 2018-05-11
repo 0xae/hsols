@@ -69,27 +69,11 @@ class UploadController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            // $path = 'administration_Upload_show';
-            // $pathArgs = array('id' => $entity->getId());
-
-            // if ($entity->getContext()) {
-            //     /**
-            //      * {
-            //      *    "path" : "",
-            //      *    "path_args" : ""
-            //      * }
-            //      */                
-            //     $context = json_decode($entity->getContext());
-            //     if (isset($context->path)) {
-            //         $path = $context->path;
-            //     }
-
-            //     if (isset($context->path_args)) {
-            //         $pathArgs = (array)$context->path_args;
-            //     }
-            // }
-            return $this->redirect(
-                $this->generateUrl($path, $pathArgs));
+            return new JsonResponse([
+                'filename' => $fileName,
+                'path' => $this->getParameter('models_directory') . '/' . $fileName,
+                'reference' => $entity->getReference()
+            ]);
         }
 
         return $this->render('BackendBundle:Upload:new.html.twig', 

@@ -23,7 +23,7 @@ class Upload {
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=200, nullable=false)
+     * @ORM\Column(name="description", type="string", length=200, nullable=true)
      */
     private $description;
 
@@ -44,7 +44,7 @@ class Upload {
     /**
      * @var string
      *
-     * @ORM\Column(name="filename", type="string", length=200, nullable=false)
+     * @ORM\Column(name="filename", type="string", length=200, nullable=true)
      */
     private $filename;
 
