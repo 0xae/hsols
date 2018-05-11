@@ -33,7 +33,6 @@ class UserType extends AbstractType {
                 'class' => 'BackendBundle:AppEntity',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                    ->where("u.context = '".Settings::NC_CTX."'")
                     ->orderBy('u.name', 'ASC');
                 },
                 'choice_label' => 'name'
@@ -42,7 +41,6 @@ class UserType extends AbstractType {
                 'class' => 'BackendBundle:Profile',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                    ->where("u.context = '".Settings::NC_CTX."'")
                     ->orderBy('u.name', 'ASC');
                 },
                 'choice_label' => 'name'                
