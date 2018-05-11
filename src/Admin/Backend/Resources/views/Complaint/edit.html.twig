@@ -1,0 +1,84 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row" ng-controller="ComplaintViewController">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="font-weight:bold">
+                    {% if entity.type == 'queixa' %}
+                        Queixa
+                    {% else %}
+                        Denúncia
+                    {% endif %}
+
+                    <a href="#">
+                    #{{ entity.objCode }}
+                    </a>
+                </h3>
+                <p style="font-size:12px;color:gray">
+                    <span class="fa fa-user"></span>
+                    Criada por {{entity.createdBy.name}}/{{entity.createdBy.entity.name}}
+                    <br/> <span class="fa fa-calendar"></span> em {{entity.createdAt|date('Y-m-d')}}
+                </p>
+                <p>
+                    <a href="{{ path('administration_Complaint') }}">                        
+                        <span class="fa fa-back"></span>Voltar
+                    </a>
+                </p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="editTab">
+                        <li role="presentation" class="active">
+                            <a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">
+                                <span>Dados</span>
+                            </a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#tab2" aria-controls="home" role="tab" data-toggle="tab">
+                                <span class="fa fa-file"></span> 
+                                Anexos
+                                <span class="badge">{{files|length}}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="padding:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            {{  include('BackendBundle:Complaint:form.html.twig', {
+                                    'form' : edit_form, 
+                                    'entity' : entity
+                                }) 
+                            }}
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            {{ include('BackendBundle:Upload:listing.html.twig', {
+                                    'files' : files
+                                })
+                            }}
+
+                            {% if not entity.disabled %}
+                                {{ include('BackendBundle:Upload:form.html.twig', {
+                                        'form' : upload_form
+                                    })
+                                }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

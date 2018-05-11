@@ -1,0 +1,83 @@
+{% extends 'BackendBundle:Default:docs.html.twig' %}
+
+{% block title %}Recibo de Ocorrência{% endblock %}
+
+{% block content -%}
+    {% image '@BackendBundle/Resources/public/img/arfa.jpg' %}
+        <img src="{{ asset_url }}" 
+             class="user-image" 
+             width="180" 
+             alt="User Image!" 
+        />
+    {% endimage %}
+
+    <center>
+        <h3 class="box-title" style="font-weight:bold">
+            Recibo de Ocorrência
+        </h3>
+    </center>
+
+    <table class="table table-hover table-striped" style="margin-bottom:70px">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Tipo</td>
+                <td>Reclamação Interna</td>
+            </tr>
+
+            <tr>
+                <td>Número de registro</td>
+                <td>{{entity.objCode}}</td>
+            </tr>
+
+            <tr>
+                <td>Dados do Utente</td>
+                <td>
+                    {{ entity.name }}<br/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Direção</td>
+                <td> {{ entity.direction }} </td>
+            </tr>
+
+            <tr>
+                <td>Data da ocorrência</td>
+                <td>
+                    {{ entity.factDate|date('Y-m-d') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4 class="msg-recep">Mensagem de Receção</h4>
+    <div class="">
+        <textarea class="form-control" rows="5" id="msg"></textarea>
+    </div>
+
+    <div style="margin-top:70px;">
+        <p style="font-size:12px;color:gray">
+            <span class="fa fa-user"></span>
+            Criado por {{entity.createdBy.name}}/{{entity.createdBy.entity.name}}
+            <br/> <span class="fa fa-calendar"></span> em {{entity.createdAt|date('Y-m-d')}}
+        </p>
+    </div>
+
+    <button id="printMe" class="btn btn-primary hidden-print">
+        <span class="fa fa-print"></span> Imprimir
+    </button>
+{% endblock %}
+
+{% block jsCode -%}
+    <script>
+        $("#printMe").click(function () {
+            window.print();
+        })
+    </script>
+{% endblock %}

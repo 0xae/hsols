@@ -1,0 +1,155 @@
+<div class="modal fade" id="viewIRECLModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      {# modal-header #}
+      <div class="modal-header bg-green">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Visualizando Reclama&ccedil;&atilde;o Interna</h4>
+      </div>
+
+      {# modal-body #}
+      <div class="modal-body">
+            <h3 class="box-title" style="font-weight:bold;margin-top:4px;">
+                <span>Reclama&ccedil;&atilde;o Interna</span>
+                <a href="#">
+                    {{ '{{entity.objCode}}' }}
+                </a>
+            </h3>
+            <p style="font-size:12px;color:gray">
+                <span class="fa fa-user"></span>
+                Criada por {{'{{entity.createByName}}'}}/{{'{{entity.createByEnt}}'}}
+            </p>
+            <br/>
+
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                            <span>Dados de registro</span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" ng-if="entity.step == 'concluded'">
+                        <a href="#ireclDetails" aria-controls="home" role="tab" 
+                            data-toggle="tab" ng-click="setIReclDetails('analysis')">
+                            <span>An&aacute;lise</span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" ng-if="entity.step == 'concluded'">
+                        <a href="#ireclDetails" aria-controls="home" role="tab" 
+                            data-toggle="tab" ng-click="setIReclDetails('decision')">
+                            <span>Decis&atilde;o</span>
+                        </a>
+                    </li>
+
+                    <li role="presentation" ng-if="entity.step == 'concluded'">
+                        <a href="#ireclDetails" aria-controls="home" role="tab" 
+                           data-toggle="tab"  ng-click="setIReclDetails('action')">
+                            <span>A&ccedil;&atilde;o</span>
+                        </a>
+                    </li>
+
+                    <li role="presentation">
+                        <a href="#anexos" aria-controls="anexos" role="tab" data-toggle="tab">Anexos</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" style="padding:10px;">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <div class="form-group">
+                            <label>Nome do utente</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{entity.name}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Direcção</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{entity.direction}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{entity.factDate}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Reclamação Interna</label>
+                            <textarea 
+                                ng-model="entity.factDetail" disabled
+                                class="form-control"
+                                rows="2" placeholder="..."></textarea>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="response">
+                         <div class="form-group">
+                            <label>
+                                <span class="fa fa-user"></span>
+                                Respondido por
+                            </label>
+                            <input class="form-control" 
+                                   disabled="disabled" 
+                                   value="{{ '{{entity.responseAuthor}} / {{entity.responseAuthorEnt}}' }}" />
+                        </div>
+
+                         <div class="form-group">
+                            <label>
+                                <span class="fa fa-calendar"></span>
+                                Respondido em
+                            </label>
+                            <input class="form-control" 
+                                   disabled="disabled" 
+                                   value="{{ '{{entity.responseDate}}' }}" />
+                        </div>
+
+                        <div class="form-group" ng-if="entity.state == NO_RESPONSE">
+                            <span class="label label-warning">Sem resposta</span>
+                        </div>
+
+                        <div class="form-group" ng-if="entity.state == RESPONDED">
+                            <label>Resposta</label>
+                            <textarea 
+                                ng-model="entity.clientResponse" disabled
+                                class="form-control"
+                                rows="3" placeholder="..."></textarea>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="anexos">
+                        {{ include('BackendBundle:Upload:listing-ng.html.twig', {}) }}
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="ireclDetails">
+                        <h3>{{'{{ireclDetails.label}}'}} da Reclamação Interna</h3>
+                        <div class="form-group">
+                            <label>Respons&aacute;vel</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{ireclDetails.resp}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{ireclDetails.date}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea 
+                                ng-model="ireclDetails.description" disabled
+                                class="form-control"
+                                rows="2" placeholder="..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+
+      {# modal-footer #}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

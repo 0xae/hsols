@@ -1,0 +1,64 @@
+administration_Complaint:
+    path:     /
+    defaults: { _controller: "BackendBundle:Complaint:index" }
+
+administration_Complaint_bystate:
+    path:     /by_state/{state}
+    defaults: { _controller: "BackendBundle:Complaint:byState" }
+
+administration_Complaint_excel:
+    path:     /excel
+    defaults: { _controller: "BackendBundle:Complaint:excelData" }
+
+administration_Complaint_updateState:
+    path:     /update_state/{id}
+    defaults: { _controller: "BackendBundle:Complaint:updateState" }
+    methods:  [POST]
+
+administration_Complaint_respond:
+    path:     /respond/{id}
+    defaults: { _controller: "BackendBundle:Complaint:respond" }
+    methods:  [POST]
+
+administration_Complaint_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Complaint:show" }
+
+administration_Complaint_parecer:
+    path:     /parecer/{id}
+    defaults: { _controller: "BackendBundle:Complaint:parecer" }
+
+administration_Complaint_receipt:
+    path:     /receipt/{id}
+    defaults: { _controller: "BackendBundle:Complaint:receipt" }
+
+administration_Complaint_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Complaint:new" }
+
+administration_Complaint_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Complaint:create" }
+    methods:  POST
+
+administration_Complaint_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Complaint:edit" }
+
+administration_Complaint_byJson:
+    path:     /{id}/json
+    defaults: { _controller: "BackendBundle:Complaint:showJson" }
+
+administration_Complaint_updatePar:
+    path:     /{id}/update_par
+    defaults: { _controller: "BackendBundle:Complaint:updatePar" }
+
+administration_Complaint_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Complaint:update" }
+    methods:  [POST, PUT]
+
+administration_Complaint_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Complaint:delete" }
+    methods:  [POST, DELETE]

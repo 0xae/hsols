@@ -1,0 +1,152 @@
+backend_administration_Order:
+    resource: "@BackendBundle/Resources/config/routing/order.yml"
+    prefix:   /administration/Order
+
+backend_administration_Product:
+    resource: "@BackendBundle/Resources/config/routing/product.yml"
+    prefix:   /administration/Product
+
+backend_administration_Location:
+    resource: "@BackendBundle/Resources/config/routing/location.yml"
+    prefix:   /administration/Location
+
+backend_administration_Upload:
+    resource: "@BackendBundle/Resources/config/routing/upload.yml"
+    prefix:   /administration/Upload
+
+backend_administration_Category:
+    resource: "@BackendBundle/Resources/config/routing/category.yml"
+    prefix:   /administration/Category
+
+backend_administration_ImplMeasure:
+    resource: "@BackendBundle/Resources/config/routing/implmeasure.yml"
+    prefix:   /administration/ImplMeasure
+
+backend_administration_Correction:
+    resource: "@BackendBundle/Resources/config/routing/correction.yml"
+    prefix:   /administration/Correction
+
+backend_administration_CompBook:
+    resource: "@BackendBundle/Resources/config/routing/compbook.yml"
+    prefix:   /administration/CompBook
+
+backend_administration_IReclamation:
+    resource: "@BackendBundle/Resources/config/routing/ireclamation.yml"
+    prefix:   /administration/IReclamation
+
+backend_administration_UserProfile:
+    resource: "@BackendBundle/Resources/config/routing/userprofile.yml"
+    prefix:   /administration/UserProfile
+
+backend_administration_Document:
+    resource: "@BackendBundle/Resources/config/routing/document.yml"
+    prefix:   /administration/Document
+
+backend_administration_Complaint:
+    resource: "@BackendBundle/Resources/config/routing/complaint.yml"
+    prefix:   /administration/Complaint
+
+backend_administration_Sugestion:
+    resource: "@BackendBundle/Resources/config/routing/sugestion.yml"
+    prefix:   /administration/Sugestion
+
+backend_administration_StageProfile:
+    resource: "@BackendBundle/Resources/config/routing/stageprofile.yml"
+    prefix:   /administration/StageProfile
+
+backend_administration_ModuleStage:
+    resource: "@BackendBundle/Resources/config/routing/modulestage.yml"
+    prefix:   /administration/ModuleStage
+
+backend_administration_Stage:
+    resource: "@BackendBundle/Resources/config/routing/stage.yml"
+    prefix:   /administration/Stage
+
+backend_administration_Profile:
+    resource: "@BackendBundle/Resources/config/routing/profile.yml"
+    prefix:   /administration/Profile/
+
+backend_administration_Module:
+    resource: "@BackendBundle/Resources/config/routing/module.yml"
+    prefix:   /administration/Module
+
+backend_administration_entities:
+    resource: "@BackendBundle/Resources/config/routing/appentity.yml"
+    prefix:   /administration/entities
+
+backend_administration_category:
+    resource: "@BackendBundle/Resources/config/routing/category.yml"
+    prefix:   /administration/category
+
+backend_administration_sugestao:
+    resource: "@BackendBundle/Resources/config/routing/sugestao.yml"
+    prefix:   /administration/sugestao
+
+backend_administration_user:
+    resource: "@BackendBundle/Resources/config/routing/user.yml"
+    prefix:   /administration/user
+
+backend_administration_nc:
+    path:  /administration/nc-objects
+    defaults:  { _controller: BackendBundle:NC:index }
+
+backend_administration_nc_search:
+    path:  /administration/nc-objects/search
+    defaults:  { _controller: BackendBundle:NC:search }
+
+backend_administration_main:
+    path:  /administration/main
+    defaults:  { _controller: BackendBundle:Admin:index }
+
+backend_administration_stats:
+    path:  /administration/stats
+    defaults:  { _controller: BackendBundle:Stats:index }
+
+backend_administration_excelData:
+    path:  /administration/excel_doc
+    defaults:  { _controller: BackendBundle:Default:excelData }
+
+backend_administration_add_permission:
+    path:  /administration/add_permission
+    defaults:  { _controller: BackendBundle:Admin:addPermission }
+
+backend_administration_permission_map:
+    path:  /administration/permission_map
+    defaults:  { _controller: BackendBundle:Admin:permissionMap }
+
+backend_administration_search:
+    path:  /administration/search
+    defaults:  { _controller: BackendBundle:Admin:search }
+
+backend_administration_remove_permission:
+    path:  /administration/remove_permission/{id}
+    defaults:  { _controller: BackendBundle:Admin:removePermission }
+
+backend_administration_permissions_of:
+    path:  /administration/permissions_of/{id}
+    defaults:  { _controller: BackendBundle:Admin:permissionsOf }
+
+backend_administration_main_profiles_remove:    
+    path:  /administration/remove_userp/{id}
+    defaults:  { _controller: BackendBundle:Admin:removeUserProfile }
+
+# dashboard_stats:
+#     path:     /dashboard/stats/{type}
+#     defaults: { _controller: BackendBundle:Default:stats }
+
+dashboard_stats_ajax:
+    path:     /dashboard/stats/ajax/{type}
+    defaults: { _controller: BackendBundle:Stats:ajax }
+
+dashboard_counters:
+    path:     /dashboard/counters
+    defaults: { _controller: BackendBundle:Default:counters }
+
+sga_dashboard:
+    path:     /administration/dashboard
+    defaults: { _controller: BackendBundle:Default:index }
+
+sga_homepage:
+    path:     /
+    defaults: { _controller: BackendBundle:Security:login }
+

@@ -1,0 +1,57 @@
+{% if is_granted('ROLE_ADMIN') or is_granted(expression('"ADMINISTRATION_IRECLAMATION_ACTION" in user.getRoles()')) %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div style="color: gray;margin-bottom: 20px;">
+            <span class="fa fa-archive"></span>
+            Ação a ser tomada
+            <hr/>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Data</label>
+            <br/>
+            {% if entity.state != 'action' %}
+                <div class="hidden">
+                {{ form_widget(form.actionDate) }}
+                </div>
+                <input disabled="" class="form-control" value="{{entity.actionDate|date('Y-m-d')}}" />
+            {% else %}
+                {{ form_widget(form.actionDate) }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>Descri&ccedil;&atilde;o</label>
+            <br/>
+            {% if entity.state != 'action' %}
+                <div class="hidden">
+                {{ form_widget(form.actionDetail) }}
+                </div>
+                <textarea class="form-control" disabled="">{{entity.actionDetail}}</textarea>
+            {% else %}
+                {{ form_widget(form.actionDetail) }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6 hidden">
+        <div class="form-group">
+            <label>Responsavel</label>
+            {{ form_widget(form.actionResp) }}
+        </div>
+    </div>
+</div>
+
+{% if entity.state == 'action' %}
+    <button id="send-to-response" type="button" 
+        class="btn btn-default send-to-btn"
+        ng-click="finishIRecl({{entity.id}})">
+        Enviar formul&aacute;rio
+    </button>
+{% endif %}
+
+{% endif %}
+

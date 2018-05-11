@@ -1,0 +1,52 @@
+{{ form_start(form, {'attr' : {
+    'id' : 'add_profile_form'
+}}) }}
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="col-md-5">
+    <div class="form-group">
+        <label>Utilizador</label>
+        {{ 
+            form_widget(form.user, {
+                'attr' : {
+                    'ng-change' : 'loadProfiles(userId)',
+                    'ng-model' : 'userId'
+                }
+            }) 
+        }}
+    </div>
+
+    <div class="form-group">
+        <label>Perfil</label>
+        {{ form_widget(form.profile) }}
+    </div>
+    {{ form(form) }}
+</div>
+
+<div class="col-md-6">
+    <label>Perfis associados {# {{"{{userId}}"}} #}</label>
+    <ul class="list-group">
+        <li ng-repeat="p in profiles" class="list-group-item">
+            <span>{{ "{{p.name}}" }}
+                <br/>
+                <span class="badge badge-primary" ng-if="p.permission == 'write'">
+                    Escrita
+                </span>
+                <span class="badge badge-primary" ng-if="p.permission == 'read'">
+                    Leitura
+                </span>
+            </span>
+
+            <a href="#" class="pull-right" ng-click="removeProfile(p.id, $index)">
+                Remover
+                <span class="text-danger fa fa-remove"></span>
+            </a>
+        </li>
+        <li ng-if="!profiles || profiles.length == 0" class="list-group-item">
+            Sem perfis associados
+        </li>
+    </ul>    
+</div>
+
+{{ form_end(form) }}

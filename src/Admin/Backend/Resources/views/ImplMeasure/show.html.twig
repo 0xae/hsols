@@ -1,0 +1,51 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">ImplMeasure #{{ entity.id }}</h3>
+                <p>
+                    <a href="{{ path('administration_ImplMeasure') }}">
+                        <span class="glyphicon glyphicon-back"></span> Voltar
+                    </a>
+                </p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body no-padding">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ entity.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Measure</th>
+                            <td>{{ entity.measure }}</td>
+                        </tr>
+                        <tr>
+                            <th>Due</th>
+                            <td>{{ entity.due|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createdat</th>
+                            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createdby</th>
+                            <td>{{ entity.createdBy }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+

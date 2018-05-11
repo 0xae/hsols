@@ -1,0 +1,50 @@
+<div class="modal fade" id="sugestionParecerModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header bg-arfa">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{ '{{modalTitle}}' }}</h4>
+        </div>
+        <form ng-submit="updatePar()" name="responseForm">
+        <div class="modal-body">
+            <label>Sugestao/Reclamacao</label>
+            {# <a href="#">{{ '{{mObject.code}}' }}</a> #}
+            <input class="form-control" disabled="disabled" value="{{ '{{mObject.code}}' }}" />
+            <br/>
+
+            <div class="form-group">
+                <label>Nome do utente</label>
+                <input class="form-control" disabled="disabled" value="{{ '{{mObject.name}}' }}" />
+            </div>
+
+            <div class="form-group">
+                <label>C&oacute;digo PTC</label>
+                <input class="form-control" ng-model="responseForm.parecerCode" />
+            </div>
+
+            <div class="form-group">
+                <label>Assunto</label>
+                <input class="form-control" ng-model="responseForm.parecerSubject" />
+            </div>
+
+            <div class="form-group">
+                <label>Destinat&aacute;rios</label>
+                <textarea ng-model="responseForm.destination" 
+                    class="form-control"
+                    rows="2" placeholder="..."></textarea>
+            </div>
+
+            <label>Texto do parecer</label>
+            <textarea ng-model="responseForm.description" 
+                class="form-control"
+                rows="5" placeholder="..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Enviar formul&aacute;rio</button>
+        </div>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

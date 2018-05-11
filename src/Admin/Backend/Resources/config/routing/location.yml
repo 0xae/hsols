@@ -1,0 +1,30 @@
+administration_Location:
+    path:     /
+    defaults: { _controller: "BackendBundle:Location:index" }
+
+administration_Location_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Location:show" }
+
+administration_Location_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Location:new" }
+
+administration_Location_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Location:create" }
+    methods:  POST
+
+administration_Location_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Location:edit" }
+
+administration_Location_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Location:update" }
+    methods:  [POST, PUT]
+
+administration_Location_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Location:delete" }
+    methods:  [POST, DELETE]

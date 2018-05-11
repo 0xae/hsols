@@ -1,0 +1,135 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <style>
+         .radio {
+            display: inline;
+            margin: 10px;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group hidden">
+                <label>Reclamacao Interna</label>
+                {{ form_widget(form.irecl) }}
+            </div>
+
+            <div class="form-group">
+                <label>Origem</label>
+                {{ form_widget(form.source) }}
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Descrição da ação</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        {{ form_widget(form.actionType) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        {{ form_widget(form.actionDescription) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.actionAuthor) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.actionDate) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Análise de Causas</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Identificação de causas</label>
+                        {{ form_widget(form.causeDescription) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.causeDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.causeResp) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Ações a Implementar</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Medidas</label>
+                        {{ form_widget(form.measure) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prazo</label>
+                        {{ form_widget(form.dueDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.implDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.implResp) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Fecho (Avaliação de Eficácia)</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Concluido</label>
+                        {{ form_widget(form.closeFinished) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de conclusao</label>
+                        {{ form_widget(form.closeDate2) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Verificação Eficácia</label>
+                        {{ form_widget(form.closeEficacy) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nova Acao</label>
+                        {{ form_widget(form.closeAction) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de accao</label>
+                        {{ form_widget(form.closeInDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data de fecho</label>
+                        {{ form_widget(form.closeDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.closeResp) }}
+                    </div>
+                </div>
+            </div>
+
+            {{ form(form) }}
+        </div>
+    </div>    
+{{ form_end(form) }}
+

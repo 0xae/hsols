@@ -1,0 +1,108 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block title %} Acompanhamento {% endblock %}
+
+{% block content -%}
+    <div class="row" ng-controller="IReclController">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Em Acompanhamento</h3>
+                </div>
+                <!-- /.box-header -->
+
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover table-striped datatable" style="margin-bottom: 70px">
+                        <thead>
+                            <tr>
+                                <th>Código #</th>
+                                <th>Nome</th>
+                                <th>Direção</th>
+                                <th>Data</th>
+                                <th>Data de resposta (15 dias)</th>
+                                <th>Criado por</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entity in entities %}
+                                <tr id="row-{{entity.id}}">
+                                    <td>
+                                        {{ entity.objCode }}
+                                    </td>             
+                                    <td>{{ entity.name }}</td> 
+                                    <td>{{ entity.direction }}</td>
+                                    <td>{{ entity.createdAt|date('Y-m-d') }}</td> 
+                                    <td>{{ entity.respDate|date('Y-m-d') }}</td> 
+                                    <td>{{ entity.createdBy.name }}/{{ entity.createdBy.entity.name }}</td>
+                                    <td>
+                                        <a id="ir-analysis-{{entity.id}}" class="hidden" 
+                                           href="{{ path('administration_IReclamation_edit', {'id': entity.id}) }}">
+                                            <span class="label label-warning">Em Análise</span>
+                                        </a>
+
+                                        <a id="ir-analysis-{{entity.id}}-resp" class="hidden" 
+                                           href="{{ path('administration_IReclamation_edit', {'id': entity.id}) }}">
+                                            <span class="label label-success">Respondido</span>
+                                        </a>
+
+                                        {% if entity.step == "concluded" %}
+                                            <button id="row-{{entity.id}}-dispatch" type="button" 
+                                                    ng-click="respondIRecl({{entity.id}}, '{{entity.objCode}}')">
+                                                Resposta
+                                            </button>
+                                        {% else %}
+                                            <div class="dropdown" style="display: inline" id="row-{{entity.id}}-dispatch">
+                                                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Despacho
+                                                    <span class="caret"></span>
+                                                </button>
+
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                                    <li>
+                                                        <a href="#" ng-click="sendToAnalysis({{entity.id}})">
+                                                            Favor&aacute;vel
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" ng-click="notFavorable({{entity.id}}, '{{entity.objCode}}')">
+                                                            N&atilde;o Favor&aacute;vel
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        {# <a href="{{ path('administration_IReclamation_edit', {'id': entity.id}) }}"
+                                           id="ir-analysis-{{entity.id}}-state">
+                                            <span class="label label-warning">Em espera</span>
+                                        </a> #}
+                                    </td>
+
+                                    <td>
+                                        <a href="#" ng-click="viewIRecl({{entity.id}}, '{{entity.type}}')">
+                                            <span class="text-warning fa fa-eye"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {{ include('BackendBundle:IReclamation:modals/viewIRECL.html.twig') }}
+                    {{ include('BackendBundle:IReclamation:modals/respond.html.twig') }}
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            {# {{ pagerfanta(fanta, 'twitter_bootstrap3', {
+                'next_message': 'Proximo',
+                'prev_message': 'Anterior'
+                })
+            }} #}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<div class="col-md-4 permission-block">
+    <div class="form-group">
+        <label>Selecionar perfil</label>
+        <select class="form-control" ng-model="profileAdd" 
+                multiple ng-change="profileChanged(profileAdd)">
+            <option ng-if="!profileId">"Selecionar"</option>
+
+            {% for p in profiles %}
+                <option id="profile-{{p.id}}" 
+                        ng-click="ativateProfile({{p.id}}, '{{p.name}}')"
+                        value="{{p.id}}">{{ p.name|capitalize }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="col-md-4 permission-block">
+    <div class="form-group">
+        <label>Associa&ccedil;&atilde;o</label>
+        <select class="form-control" multiple id="permissionsAssoc">
+            <option ng-if="!profileId">"Menu associado"</option>
+            <option ng-if="isLoading">Carregando...</option>
+            <optgroup label="{{ '{{gLabel}}' }}" ng-repeat="(gLabel,gValue) in profilePermissions">
+                <option ng-repeat="p in gValue" value="{{'{{p.id}}'}}">
+                    {{ '{{p.permissionLabel}}' }}
+                </option>
+            </optgroup>
+        </select>
+    </div>
+</div>
+
+<div class="col-md-4 permission-block">
+    <div class="form-group">
+        <label>Selecionar permiss&atilde;o</label>
+        <select class="form-control" multiple id="permissionsToAdd">
+            {% for pg,pv in permissions %}
+                <optgroup label="{{pg}}">
+                    {% for p in pv %}
+                        <option id="perm-{{p['code']}}" 
+                            data-label="{{p['label']}}" 
+                            value="{{p['code']}}">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                {{p['label']}}
+                        </option>
+                    {% endfor %}
+                </optgroup>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <center>
+        <button class="btn btn-default" ng-click="assocPermissions()">&lt;&lt;</button>
+        <button class="btn btn-default" ng-click="removeAssocPermissions()">&gt;&gt;</button>
+    </center>
+</div>
+
+{# <div class="col-md-6">
+    <label>Permiss&otilde;es associadas</label>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="p in permissions">
+            {{ '{{p.permissionLabel}}' }}
+            <a href="#" class="text-danger pull-right" ng-click="removePermission(p.id, $index)">
+                <span class="fa fa-remove"></span>
+            </a>
+        </li>
+
+        <li class="list-group-item" ng-if="permissions.length == 0 && !isLoading">
+            Sem permiss&otilde;es associados.
+        </li>
+
+        <li class="list-group-item alert-warning" ng-if="isLoading">
+            Carregando...
+        </li>
+    </ul>
+</div> #}
+
+

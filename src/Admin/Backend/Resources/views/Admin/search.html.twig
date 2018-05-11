@@ -1,0 +1,84 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+<style>
+    body {
+        background: url("{{ asset('BG-2.png') }}") !important;
+        background-size: cover;
+        background-clip: padding-box;
+    }
+    .content-wrapper {
+        background: transparent;
+    }
+    .ibox {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        border-radius: 0px;
+    }
+    .btn.btn-flat {
+        padding: 2px 7px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 14px;">
+            {% if (results|length) == 0 %}
+                <h4 style="text-align:center">
+                    N&atilde;o foi encontrado nenhum resultado para a pesquisa '{{q}}'<br/>
+                    <small>Queira redefinir a sua pesquisa</small>
+                </h4>
+            {% else %}
+                <h4>Resultados da sua pesquisa</h4>
+            {% endif %}
+            <br/>
+        </div>
+
+        <div class="col-md-10">
+            {% for res in results %}
+                <div class="box ibox">
+                    <div class="box-header">
+                        <a href="#">
+                            <h2 class="box-title">
+                                #{{res.code_label}}
+                            </h2>
+                        </a>
+                        <span class="pull-right" style="color: #666">
+                            <img src="{{ asset('icons/calendar-green.svg') }}" width="25" />
+                            <span style="padding-top:5px">
+                                <strong>{{res.created_at|date('d/m/Y')}}</strong>
+                            </span>
+                        </span>
+                        <br/>
+                        <span class="label label-default">
+                            {{ res.state | status }}
+                        </span>
+                    </div>
+                    <div class="box-body">
+                        <blockquote style="border-left: 0px;overflow:hidden;">
+                        {% if res.code_type in ['SG', 'RE'] %}
+                            {{res.description}}
+                        {% elseif res.code_type in ['QX', 'DN'] %}
+                            {{res.fact_detail}}
+                        {% elseif res.code_type == 'RI' %}
+                            {{res.fact_detail}}
+                        {% elseif res.code_type == 'LR' %}
+                            {{res.complaint}}
+                        {% endif %}
+                        </blockquote>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block jsCode %}
+<script>
+$(document).ready(function (){
+});
+</script>
+{% endblock %}
+

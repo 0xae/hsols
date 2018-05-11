@@ -1,0 +1,30 @@
+administration_StageProfile:
+    path:     /
+    defaults: { _controller: "BackendBundle:StageProfile:index" }
+
+administration_StageProfile_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:StageProfile:show" }
+
+administration_StageProfile_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:StageProfile:new" }
+
+administration_StageProfile_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:StageProfile:create" }
+    methods:  POST
+
+administration_StageProfile_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:StageProfile:edit" }
+
+administration_StageProfile_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:StageProfile:update" }
+    methods:  [POST, PUT]
+
+administration_StageProfile_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:StageProfile:delete" }
+    methods:  [POST, DELETE]

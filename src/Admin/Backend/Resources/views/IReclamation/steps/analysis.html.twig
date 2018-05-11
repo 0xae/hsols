@@ -1,0 +1,61 @@
+{% if is_granted('ROLE_ADMIN') or is_granted(expression('"ADMINISTRATION_IRECLAMATION_ANALYSIS" in user.getRoles()')) %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div style="color: gray;margin-bottom: 20px;">
+            <span class="fa fa-archive"></span>
+            Análise da Reclamação
+            <hr/>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="hidden">
+            {{ form_widget(form.step) }}
+        </div>
+
+        <div class="form-group">
+            <label>Data</label>
+            <br/>
+            {% if entity.state != 'analysis' %}
+                <div class="hidden">
+                {{ form_widget(form.analysisDate) }}
+                </div>
+                <input disabled="" class="form-control" value="{{entity.analysisDate|date('Y-m-d')}}" />
+            {% else %}
+                {{ form_widget(form.analysisDate) }}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>Descri&ccedil;&atilde;o</label>
+            <br/>
+            {% if entity.state != 'analysis' %}
+                <div class="hidden">
+                {{ form_widget(form.analysisDetail) }}
+                </div>
+                <textarea class="form-control" disabled="">{{entity.analysisDetail}}</textarea>
+            {% else %}
+                {{ form_widget(form.analysisDetail) }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-md-6 hidden">
+        <div class="form-group">
+            <label>Responsavel</label>
+            {{ form_widget(form.analysisResp) }}
+        </div>
+    </div>
+</div>
+
+{% if entity.state == 'analysis' %}
+    <button id="send-to-decision" type="button" 
+            class="btn btn-default send-to-btn"
+            ng-click="sendTo({{entity.id}}, state.DECISION, 'decisão', state.ANALYSIS)">
+        Enviar formul&aacute;rio
+    </button>
+{% endif %}
+
+{% endif %}
+

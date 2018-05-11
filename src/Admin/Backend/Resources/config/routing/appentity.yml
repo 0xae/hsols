@@ -1,0 +1,30 @@
+administration_entities:
+    path:     /
+    defaults: { _controller: "BackendBundle:AppEntity:index" }
+
+administration_entities_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:AppEntity:show" }
+
+administration_entities_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:AppEntity:new" }
+
+administration_entities_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:AppEntity:create" }
+    methods:  POST
+
+administration_entities_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:AppEntity:edit" }
+
+administration_entities_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:AppEntity:update" }
+    methods:  [POST, PUT]
+
+administration_entities_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:AppEntity:delete" }
+    methods:  [POST, DELETE]

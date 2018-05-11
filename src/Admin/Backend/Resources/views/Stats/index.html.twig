@@ -1,0 +1,221 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+    <div ng-controller="StatisticsController">
+        {# counters #}
+        <div class="row">
+            <div class="col-md-3 pull-right" style="margin-bottom: 20px">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon " id="sizing-addon3">
+                        <span class="fa fa-calendar"></span>
+                    </span>
+                    <input class="form-control" type="text" id="daterange" name="daterange" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {{ include('BackendBundle:Stats:counters.html.twig') }}
+        </div>
+
+        {# graphs #}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <div id="responseAvg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="">
+                    </div>
+                    <div class="box-body no-padding">
+                        <div id="by_department"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <div id="pieChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <div id="graph4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body no-padding">
+                        <div id="graph5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="">
+                    </div>
+                    <div class="box-body no-padding">
+                        <div id="responseTime"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsCode %}
+
+<script>
+    $(document).ready(function (){
+        function renderBar(xtitle, ytitle, subtitle, container, keys, series) {
+            Highcharts.chart(container, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: xtitle
+                },
+                subtitle: {
+                    text: subtitle
+                },
+                xAxis: {
+                    categories: keys,
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ytitle
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.0f} '+ytitle+'</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.3,
+                        borderWidth: 0
+                    }
+                },
+                series: series
+            });        
+        }
+
+        function renderThirdPartyOccurences() {
+            var render = [{
+                    name: "Denúncias",
+                    data: [{{thirdy_party['denuncia']}}],
+                    color: '#c82061'
+                },
+                {
+                    name: "Queixas",
+                    data: [{{thirdy_party['queixa']}}],
+                    color: '#681133'
+                },
+                {
+                    name: "Reclamações externas",
+                    data: [{{thirdy_party['reclamacao']}}],
+                    color: '#4e802c'
+                },
+                {
+                    name: "Sugestões",
+                    data: [{{thirdy_party['sugestao']}}],
+                    color: '#1155cc'
+                }];
+
+            renderBar('Números de ocorrências por competência de terceiros',
+                'Ocorrência',
+                '',
+                'graph5',
+                ["Ocorrência"],
+                render
+            ); 
+        }
+
+        // Build the chart
+        Highcharts.chart('pieChart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Quantidade por tipo de ocorrência'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        },
+                        connectorColor: 'silver'
+                    }
+                }
+            },
+            series: [{
+                name: 'Percentagem',
+                data: [
+                    { 
+                        name: 'Denúncia', 
+                        y: {{pie['denuncia']}},
+                        color: '#c82061'
+                    },
+                    {
+                        name: 'Queixas',
+                        y: {{pie['queixa']}},
+                        color: '#681133'
+                    },
+                    {
+                        name: 'Sugestão',
+                        y: {{pie['sugestao']}},
+                        color: '#1155cc'
+                    },
+                    { 
+                        name: 'Reclamação Externa', 
+                        y: {{pie['reclamacao']}},
+                        color: '#4e802c',
+                    },
+                    { 
+                        name: 'Reclamação Interna', 
+                        y: {{pie['reclamacao_interna']}},
+                        color: '#6eb63e'
+                    },
+                    { 
+                        name: 'Livro de reclamações', 
+                        y: {{pie['comp_book']}},
+                        color: '#f39c12'
+                    },
+                ]
+            }]
+        });
+
+        renderThirdPartyOccurences();
+    });
+</script>
+
+{% endblock %}

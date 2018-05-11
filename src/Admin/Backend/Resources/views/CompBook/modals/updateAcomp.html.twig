@@ -1,0 +1,24 @@
+<form ng-submit="sendAcomp()" name="acompForm">
+    <div class="form-group">
+        <label>Data de envio</label>
+        <input class="form-control" 
+            type="date"
+            required="required"
+            ng-model="req.sendDate"
+            ng-disabled="entity.response_author"
+        />
+    </div>
+
+    <div class="form-group">
+        <label>Autoridade enviado</label>
+        <input class="form-control" 
+            required="required"
+            ng-model="req.sendTo"
+            ng-disabled="entity.response_author"
+        />
+    </div>
+
+    <button ng-if="!entity.response_author" 
+            type="submit" 
+            class="btn btn-success">Enviar formul&aacute;rio</button>
+</form>

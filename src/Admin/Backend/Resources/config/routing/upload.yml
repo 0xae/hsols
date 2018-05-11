@@ -1,0 +1,38 @@
+administration_Upload:
+    path:     /
+    defaults: { _controller: "BackendBundle:Upload:index" }
+
+administration_Upload_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Upload:show" }
+
+administration_Upload_find:
+    path:     /find/{ref}
+    defaults: { _controller: "BackendBundle:Upload:find" }
+
+administration_Upload_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Upload:new" }
+
+administration_Upload_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Upload:create" }
+    methods:  POST
+
+administration_Upload_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Upload:edit" }
+
+administration_Upload_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Upload:update" }
+    methods:  [POST, PUT]
+
+administration_Upload_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Upload:delete" }
+    methods:  [POST, DELETE]
+
+administration_Upload_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "BackendBundle:Upload:remove" }

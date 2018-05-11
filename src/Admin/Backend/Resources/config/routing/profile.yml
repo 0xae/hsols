@@ -1,0 +1,30 @@
+administration_Profile:
+    path:     /
+    defaults: { _controller: "BackendBundle:Profile:index" }
+
+administration_Profile_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Profile:show" }
+
+administration_Profile_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Profile:new" }
+
+administration_Profile_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Profile:create" }
+    methods:  POST
+
+administration_Profile_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Profile:edit" }
+
+administration_Profile_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Profile:update" }
+    methods:  [POST, PUT]
+
+administration_Profile_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Profile:delete" }
+    methods:  [POST, DELETE]

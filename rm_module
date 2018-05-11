@@ -1,0 +1,7 @@
+#!/bin/bash
+module=$1
+
+rm src/Admin/Backend/Controller
+rm src/Admin/Backend/Entity/$module
+rm "src/Admin/Backend/Form/$module"
+rm -rf "src/Admin/Backend/Resources/views/$module"

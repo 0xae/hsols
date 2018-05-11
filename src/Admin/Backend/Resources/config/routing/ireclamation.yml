@@ -1,0 +1,63 @@
+administration_IReclamation:
+    path:     /
+    defaults: { _controller: "BackendBundle:IReclamation:index" }
+
+administration_IReclamation_excel:
+    path:     /excel
+    defaults: { _controller: "BackendBundle:IReclamation:excelData" }
+
+
+administration_IReclamation_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:IReclamation:show" }
+
+administration_IReclamation_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:IReclamation:new" }
+
+administration_IReclamation_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:IReclamation:create" }
+    methods:  POST
+
+administration_IReclamation_byState:
+    path:     /by_state/{state}
+    defaults: { _controller: "BackendBundle:IReclamation:byState" }
+
+administration_IReclamation_updateState:
+    path:     /update_state/{id}
+    defaults: { _controller: "BackendBundle:IReclamation:updateState" }
+    methods:  [POST]
+
+administration_IReclamation_respond:
+    path:     /respond/{id}
+    defaults: { _controller: "BackendBundle:IReclamation:respond" }
+    methods:  [POST]
+
+administration_IReclamation_sendToResponse:
+    path:     /send_to_response/{id}
+    defaults: { _controller: "BackendBundle:IReclamation:sendToResponse" }
+    methods:  [POST]    
+
+administration_IReclamation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:IReclamation:edit" }
+
+administration_IReclamation_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:IReclamation:update" }
+    methods:  [POST, PUT]
+
+administration_IReclamation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:IReclamation:delete" }
+    methods:  [POST, DELETE]
+
+administration_IReclamation_byJson:
+    path:     /{id}/json
+    defaults: { _controller: "BackendBundle:IReclamation:showJson" }
+
+administration_IReclamation_receipt:
+    path:     /{id}/receipt
+    defaults: { _controller: "BackendBundle:IReclamation:receipt" }
+

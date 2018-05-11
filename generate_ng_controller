@@ -1,0 +1,5 @@
+#!/bin/bash
+controller=$1
+template=src/Admin/BackendBundle/Resources/public/js/app/controllers/controller.template.js
+
+

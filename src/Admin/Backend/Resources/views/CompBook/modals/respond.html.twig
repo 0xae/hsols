@@ -1,0 +1,33 @@
+<div class="modal fade" id="complaintRespondModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header bg-green">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Responder ao utente</h4>
+        </div>
+        <form ng-submit="submitResponse()" name="responseForm">
+            <div class="modal-body">
+                <h4>
+                    <a href="#">{{ '{{mObject.code}}' }}</a>
+                </h4>
+                <div class="form-group">
+                    <label>Nome do utente</label>
+                    <input class="form-control" disabled="disabled" value="{{ '{{mObject.name}}' }}" />
+                </div>
+
+                <label>Resposta para o utente (<span style="color:orangered">*</span>)</label>
+                <textarea ng-model="responseForm.response" 
+                    required
+                    class="form-control"
+                    rows="7"
+                    placeholder="..."></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Enviar formul&aacute;rio</button>
+            </div>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

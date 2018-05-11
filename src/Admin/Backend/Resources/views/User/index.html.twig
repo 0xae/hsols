@@ -1,0 +1,76 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+
+<div class="row">
+    <div class="col-xs-12">
+        {# <a href="{{ path('administration_user_new') }}" class="btn btn-default">Registar utilizador</a>
+        <a href="{{ path('administration_user') }}" class="btn btn-default">Listar utilizador</a>
+        <a href="{{ path('administration_Profile_new') }}" class="btn btn-default">Registar perfil</a>
+        <a href="{{ path('administration_Profile') }}" class="btn btn-default">Listar perfil</a>
+        <a href="#" class="btn btn-default">Associar perfil</a> #}
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <span class="fa fa-user"></span>
+                    Utilizadores
+                </h3>
+
+                <div class="box-tools">
+                    <a class="btn btn-primary" 
+                    href="{{ path('administration_user_new') }}">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Criar Utilizador
+                    </a>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable">
+                    <thead>
+                        <tr>                                        
+                            <th>ID#</th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Morada</th>
+                            <th>Criado em</th>
+                            <th>Criado por</th>                                
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('administration_user_show', { 'id': entity.id }) }}">
+                                    #{{ entity.id }}
+                                    </a>
+                                </td>                                                                 
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.phone }}</td>
+                                <td>{{ entity.address }}</td>
+                                <td>
+                                    {% if entity.createdAt %}
+                                        {{ entity.createdAt|date('Y-m-d H:i:s') }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ entity.createdBy }}</td>
+                                <td>
+                                    <a href="{{ path('administration_user_edit', { 'id': entity.id }) }}">
+                                        <span class="badge badge-primary">EDITAR</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

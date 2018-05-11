@@ -1,0 +1,3 @@
+#!/bin/bash
+mod=$1
+php app/console generate:doctrine:crud --entity=BackendBundle:$mod -n --format=yml --overwrite  --with-write  --route-prefix=/administration/$mod

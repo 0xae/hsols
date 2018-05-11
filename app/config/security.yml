@@ -1,0 +1,41 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_MANAGER: ROLE_ADMIN
+        ROLE_SIMPLE: ROLE_USER
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                #rediciona para uma pagina segura quando login foi sucesso
+                default_target_path: "/administration/dashboard"
+                #caso login falhar vai cair na tela de login de novo
+                failure_path: /
+                provider: fos_userbundle
+                # csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                csrf_provider: form.csrf_provider
+
+            logout:
+                #quando fazer logout rediciona para pagina de login
+                    target: /
+            anonymous:    true
+
+    access_control:
+        # so usuario nao autenticado pode fazer login
+        # - { path: ^/login$, roles: IS_AUTHENTIFICATED_ANONYMOUSLY }
+        - { path: ^/administration, roles: ROLE_USER }
+        - { path: ^/administration/dashboard, roles: ROLE_USER }
+        # - { path: ^/administration/admin, roles: ROLE_ADMIN }
+
+# access_control:
+#     - { path: ^/login, roles: IS_AUTHENTIFICATED_ANONYMOUSLY }
+#     - { path: ^/*, roles: ROLE_ADMIN }

@@ -1,0 +1,94 @@
+{% extends 'BackendBundle:Default:docs.html.twig' %}
+
+{% block content -%}
+    {% image '@BackendBundle/Resources/public/img/arfa.jpg' %}
+        <img src="{{ asset_url }}" 
+             class="user-image" 
+             width="180" 
+             alt="User Image!" 
+        />
+    {% endimage %}
+
+    <center>
+        <h3 class="box-title" style="font-weight:bold">
+            Recibo de resposta
+        </h3>
+    </center>
+
+    <table class="table table-hover table-striped" style="margin-bottom:70px">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Tipo
+                </td>
+                <td>                    
+                    {% if entity.type == 'reclamacao' %}
+                        Reclamação Externa
+                    {% else %}
+                        Sugestão
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Numero do registo
+                </td>
+                <td>#{{ entity.objCode }}</td>
+            </tr>
+
+            <tr>
+                <td>Data da ocorrencia</td>
+                <td>
+                    {{ entity.date|date('Y-m-d') }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Dados do Utente</td>
+                <td>
+                    {{ entity.name }}<br/>
+                    {{ entity.phone }}<br/>
+                    {{ entity.email }}<br/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Data da resposta</td>
+                <td>
+                    {{ entity.responseDate|date('Y-m-d') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Resposta</h4>
+    <div class="well">
+        {{entity.clientResponse}}
+    </div>
+
+    <div style="margin-top:70px;">
+        <p style="font-size:12px;color:gray">
+            <span class="fa fa-user"></span>
+            Respondida por {{entity.responseAuthor.name}}/{{entity.responseAuthor.entity.name}}
+            <br/> <span class="fa fa-calendar"></span> em {{entity.responseDate|date('Y-m-d')}}
+        </p>
+    </div>
+
+    <button id="printMe" class="btn btn-primary hidden-print">
+        <span class="fa fa-print"></span> Imprimir
+    </button>
+{% endblock %}
+
+{% block jsCode -%}
+    <script>
+        $("#printMe").click(function () {
+            window.print();
+        })
+    </script>
+{% endblock %}

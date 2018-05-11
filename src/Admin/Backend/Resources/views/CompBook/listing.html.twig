@@ -1,0 +1,77 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block title %} {{label}} {% endblock %}
+
+{% block content -%}
+
+<div class="row" ng-controller="CompBookController">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">{{label}}</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable">
+                    <thead>
+                        <tr>                                       
+                            <th>ID#</th>
+                            <th>Utente</th>
+                            <th>Fornecedor</th>
+                            <th>Data de ocorrencia</th>
+                            <th>Data de registro</th>
+                            <th>Data de resposta</th>
+                            <th>Data prevista (10 dias)</th>
+                            <th>Criado por</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in objects %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('administration_CompBook_edit', {'id': entity.id}) }}">
+                                    #{{ entity.id }}
+                                    </a>
+                                </td>
+                                <td>{{ entity.clientName }}</td>
+                                <td>{{ entity.supplierName }}</td>
+                                <td>{{ entity.complaintDate|date('Y-m-d') }}</td>      
+                                <td>{{ entity.createdAt|date('Y-m-d') }}</td> 
+                                <td>{{ entity.responseDate|date('Y-m-d') }}</td>
+                                <td>{{ entity.respDate|date('Y-m-d') }}</td>
+                                <td>
+                                    {{ entity.createdBy.name }}
+                                    {% if entity.createdBy.entity %}
+                                     / {{ entity.createdBy.entity.name }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="viewObject({{entity.id}})">
+                                        <span class="text-warning fa fa-eye"></span>
+                                    </a>
+
+                                    {% if state == 'respondido' %}
+                                        <a href="{{ path('administration_CompBook_receipt', {'id': entity.id, 'type': 'response'}) }}"
+                                            title="Recibo do utente"
+                                            class="hidden-print"
+                                            target="_blank">
+                                            <span class="label label-primary">Recibo de resposta</span>
+                                        </a>
+                                    {% endif %}
+                                </td>   
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    {{ include('BackendBundle:CompBook:modals/viewObject.html.twig') }}
+</div>
+
+{% endblock %}

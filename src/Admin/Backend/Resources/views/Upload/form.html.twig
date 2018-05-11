@@ -1,0 +1,38 @@
+{{ form_start(form, {
+    'attr': {
+        'id' : 'upload-form'
+    }
+}) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Descri&ccedil;&atilde;o</label>
+                {{ form_widget(form.description) }}
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de anexo</label>
+                {{ form_widget(form.annexType) }}
+            </div>
+
+            <div class="hidden">
+                {{ form_widget(form.reference) }}
+                {{ form_widget(form.context) }}
+            </div>
+
+            {#
+            <div class="form-group">
+                <label>filename</label>
+                {{ form_widget(form.filename) }}
+            </div> 
+            <div class="form-group">
+                <label>Data</label>
+                {{ form_widget(form.createdAt) }}
+            </div>
+            #}
+            {{ form(form) }}
+        </div>
+    </div>    
+{{ form_end(form) }}
+

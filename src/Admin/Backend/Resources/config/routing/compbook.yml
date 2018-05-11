@@ -1,0 +1,51 @@
+administration_CompBook:
+    path:     /
+    defaults: { _controller: "BackendBundle:CompBook:index" }
+
+administration_CompBook_excel:
+    path:     /excel
+    defaults: { _controller: "BackendBundle:CompBook:excelData" }
+
+administration_CompBook_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:CompBook:show" }
+
+administration_CompBook_byJson:
+    path:     /{id}/json
+    defaults: { _controller: "BackendBundle:CompBook:showJson" }
+
+administration_CompBook_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:CompBook:new" }
+
+administration_CompBook_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:CompBook:create" }
+    methods:  POST
+
+administration_CompBook_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:CompBook:edit" }
+
+administration_CompBook_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:CompBook:update" }
+    methods:  [POST, PUT]
+
+administration_CompBook_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:CompBook:delete" }
+    methods:  [POST, DELETE]
+
+administration_CompBook_updateAcomp:
+    path:     /{id}/update_comp
+    defaults: { _controller: "BackendBundle:CompBook:updateAcomp" }
+    methods:  [POST]
+
+administration_CompBook_byState:
+    path:     /by_state/{state}
+    defaults: { _controller: "BackendBundle:CompBook:byState" }
+
+administration_CompBook_receipt:
+    path:     /receipt/{id}
+    defaults: { _controller: "BackendBundle:CompBook:receipt" }

@@ -1,0 +1,254 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {# Identificação do utente #}
+    <div class="row">
+        <div class="col-md-6">
+            <div style="color: gray;margin-bottom: 20px;">
+                <span class="fa fa-user"></span>
+                Identificação do utente
+            </div>
+
+            <div class="form-group">
+                <label>Nome</label>
+                {{ form_widget(form.name, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Morada</label>
+                {{ form_widget(form.address, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Localidade</label>
+                {{ form_widget(form.locality, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Telefone</label>
+                {{ form_widget(form.phone, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                {{ form_widget(form.email, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div style="color: gray;margin-bottom: 20px;">
+                <span class="fa fa-archive"></span>
+                Queixa/Denúncia
+            </div>
+
+            <div class="form-group">
+                <label>Tipo</label>
+                {{ form_widget(form.type, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group hidden">
+                <label>Data de criação</label>
+                {{ form_widget(form.createdAt, {
+                    'read_only' : true
+                }) }}
+            </div>
+
+            <div class="form-group" ng-init="setCategory('{{entity.complaintCategory}}')">
+                <input type="checkbox" ng-model="categoryConf.cat_sf.active" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4" />
+                <label>Setor Farmacêutico</label>
+                <div>
+                    <ul class="unstyled">
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sf.op1" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4 " /> Biocidas</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sf.op2" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4 " /> Medicamentos de Uso Humano</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sf.op3" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4 " /> Produtos Cosméticos</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sf.op4" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4 " /> Produtos Químico-farmacêuticos</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sf.op5" ng-disabled="categoryConf.cat_sa.active || categoryConf.cat_sa.op1 || categoryConf.cat_sa.op2 || categoryConf.cat_sa.op3 || categoryConf.cat_sa.op4 " /> Outros</li>
+                    </ul>
+                </div>
+                {{ form_widget(form.complaintCategory, {'attr': {
+                    'style' : 'display: none',
+                    'disabled' : entity.disabled
+                }}) }}
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" ng-model="categoryConf.cat_sa.active" ng-disabled="categoryConf.cat_sf.active || categoryConf.cat_sf.op1 || categoryConf.cat_sf.op2 || categoryConf.cat_sf.op3 || categoryConf.cat_sf.op4 || categoryConf.cat_sf.op5" />
+                <label>Setor Alimentar</label>
+                <div>
+                    <ul class="unstyled">
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sa.op1" ng-disabled="categoryConf.cat_sf.active || categoryConf.cat_sf.op1 || categoryConf.cat_sf.op2 || categoryConf.cat_sf.op3 || categoryConf.cat_sf.op4 || categoryConf.cat_sf.op5 " /> Alimentos destinados ao Consumo Humano</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sa.op2" ng-disabled="categoryConf.cat_sf.active || categoryConf.cat_sf.op1 || categoryConf.cat_sf.op2 || categoryConf.cat_sf.op3 || categoryConf.cat_sf.op4 || categoryConf.cat_sf.op5 " /> Suplementos e Aditivos Alimentares</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sa.op3" ng-disabled="categoryConf.cat_sf.active || categoryConf.cat_sf.op1 || categoryConf.cat_sf.op2 || categoryConf.cat_sf.op3 || categoryConf.cat_sf.op4 || categoryConf.cat_sf.op5 " /> Alimentos com propriedades Funcionais</li>
+                        <li><input type="checkbox" ng-model="categoryConf.cat_sa.op4" ng-disabled="categoryConf.cat_sf.active || categoryConf.cat_sf.op1 || categoryConf.cat_sf.op2 || categoryConf.cat_sf.op3 || categoryConf.cat_sf.op4 || categoryConf.cat_sf.op5 " /> Outros</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        {# <div class="col-md-12">
+            {% if entity.id %}
+                <div class="form-group">
+                    <label>Enviar para</label>
+                    {{ form_widget(form.stage) }}
+                </div>
+            {% else %}
+                <div class="form-group" style="display:none">
+                    {{ form_widget(form.stage) }}
+                </div>
+            {% endif %}
+        </div> #}
+    </div>
+
+    {# Identificação do Operador Económico #}
+    <div class="row" style="margin-top:25px;">
+        <div class="col-md-12">
+            <div style="color: gray;margin-bottom: 20px;">
+                <span class="fa fa-archive"></span>
+                Identificação do Operador Económico
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Nome</label>
+                {{ form_widget(form.opName, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                <label>Morada</label>
+                {{ form_widget(form.opAddress, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                <label>Localidade</label>
+                {{ form_widget(form.opLocality, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Telefone</label>
+                {{ form_widget(form.opPhone, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                {{ form_widget(form.opEmail, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+        </div>
+    </div>
+
+    {# Descrição dos Fatos #}
+    <div class="row" style="margin-top:25px;">
+        <div class="col-md-12">
+            <div style="color: gray;margin-bottom: 20px;">
+                <span class="fa fa-archive"></span>
+                Descrição sum&aacute;ria dos fatos
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Data</label>
+                <br/>
+                {% if entity.disabled %}
+                    <div class="hidden">
+                    {{ form_widget(form.factDate) }}
+                    </div>
+                    <input disabled="" class="form-control" value="{{entity.factDate|date('Y-m-d')}}" />
+                {% else %}
+                    {{ form_widget(form.factDate) }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>Local</label>
+                {{ form_widget(form.factLocality, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Descri&ccedil;&atilde;o</label>
+                {{ form_widget(form.factDetail, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                <label>Entrega do produto a ARFA ?</label>
+                {# <br/>Sim<br/>N&atilde;o #}
+                {{ form_widget(form.hasProduct, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_widget(form.submit, {
+                    'attr' : {
+                        'disabled' : entity.disabled
+                    }
+                }) }}
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                {# {{ form_widget(form.hasAnnex) }} #}
+            </div>
+
+            <div class="form-group">
+                {# <label>Tipo do anexo</label> #}
+                {# {{ form_widget(form.annexType) }} #}
+            </div>
+        </div>
+
+        {{ form(form) }}
+    </div>
+{{ form_end(form) }}

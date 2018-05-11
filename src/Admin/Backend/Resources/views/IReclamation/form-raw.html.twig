@@ -1,0 +1,251 @@
+
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div role="tabpanel" class="wizard-tab">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#frm_tab1" aria-controls="home" role="tab" data-toggle="tab">
+                <span>Registro</span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#frm_tab2" aria-controls="home" 
+                role="tab" data-toggle="tab">
+                <span>Análise da Reclamação</span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#frm_tab3" aria-controls="home" 
+                role="tab" data-toggle="tab">
+                <span>Decisão a ser tomada</span>
+            </a>
+        </li>
+
+        <li role="presentation">
+            <a href="#frm_tab4" aria-controls="home" role="tab" data-toggle="tab">
+                <span>Ação a ser tomada</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="padding:10px;">
+        <div role="tabpanel" class="tab-pane active" id="frm_tab1">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Reclamação Interna</h3>
+                    <div style="color: gray;margin-bottom: 20px;">
+                        <span class="fa fa-user"></span>
+                        Dados do utente
+                        <hr/>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.factDate) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        {{ form_widget(form.name) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Direcção</label>
+                        {{ form_widget(form.direction) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6" ng-init="defChoice = 'c1'">
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        {{ form_widget(form.type, {'attr' : {
+                            'ng-model' : 'defChoice'
+                        } }) }}
+                        <div style="padding: 10px;" ng-if="defChoice == 'c9'">
+                            <span style="color:gray;">
+                                <strong>Descreva</strong>
+                            </span>
+                            {{ form_widget(form.typeData) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="color: gray;margin-bottom: 20px;">
+                        <span class="fa fa-archive"></span>
+                        Descrição sum&aacute;ria dos fatos
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Descri&ccedil;&atilde;o</label>
+                        {{ form_widget(form.factDetail) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="frm_tab2">
+            <h3>Análise da Reclamação</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="color: gray;margin-bottom: 20px;">
+                        <span class="fa fa-archive"></span>
+                        Análise da Reclamação
+                        {% if entity.step == 2 %}
+                        <div class="pull-right">
+                            <a href="#">
+                            <span class="label label-primary"
+                                  ng-click="advanceTo('Deseja avançar para decisão a ser tomada?', {{entity.id}}, 3)">
+                                Avan&ccedil;ar 
+                                <span class="fa fa-chevron-right"></span>
+                            </span>
+                            </a>
+                        </div>
+                        {% endif %}
+                        <hr/>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="hidden">
+                        {{ form_widget(form.step) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.analysisDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descri&ccedil;&atilde;o</label>
+                        {{ form_widget(form.analysisDetail, {
+                            'attr': {
+                                'required' : entity.step == 'step#2'
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.analysisResp) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="frm_tab3">
+            <h3>Decisão a ser tomada</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="color: gray;margin-bottom: 20px;">
+                        <span class="fa fa-archive"></span>
+                        Decisão a ser tomada
+                        {% if entity.step == 3 %}
+                            <a href="#" class="pull-right">
+                                <span class="label label-primary"
+                                        ng-click="advanceTo('Deseja avançar para ação a ser tomada?', {{entity.id}}, 4)">
+                                    Avan&ccedil;ar 
+                                    <span class="fa fa-chevron-right"></span>
+                                </span>
+                            </a>
+                        {% endif %}
+                        <hr/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.decisionDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descri&ccedil;&atilde;o</label>
+                        {{ form_widget(form.decisionDetail) }}
+                    </div>        
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.decisionResp) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="frm_tab4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Ação a ser tomada</h3>
+                    <div style="color: gray;margin-bottom: 20px;">
+                        <span class="fa fa-archive"></span>
+                        Ação a ser tomada
+
+                        {% if entity.step == 4 %}
+                            <a href="#" class="pull-right">
+                                <span class="label label-success"
+                                    ng-click="advanceTo('Deseja concluir esta reclamação interna ?', {{entity.id}}, 5)">
+                                    Concluir
+                                    <span class="fa fa-chevron-right"></span>
+                                </span>
+                            </a>
+                        {% elseif entity.step == 5 %}
+                            <a href="#" class="pull-right">
+                                <span class="label label-success">
+                                    Concluida
+                                    <span class="fa fa-check"></span>
+                                </span>
+                            </a>
+                        {% endif %}
+                        <hr/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Data</label>
+                        {{ form_widget(form.actionDate) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descri&ccedil;&atilde;o</label>
+                        {{ form_widget(form.actionDetail) }}
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Responsavel</label>
+                        {{ form_widget(form.actionResp) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden">
+{{ form_widget(form.createdBy) }}
+</div>
+
+{{ form(form) }}
+
+{{ form_end(form) }}
+

@@ -1,0 +1,27 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    complaints_directory: '%kernel.root_dir%/web/uploads/complaints'
+
+services:
+    sga.admin.table.pagination:
+        class: Admin\Backend\Model\Pagination
+        arguments: [@service_container]
+
+    sga.admin.filter:
+        class: Admin\Backend\Model\Filter
+        arguments: [@service_container]
+
+    sga.admin.stats:
+        class: Admin\Backend\Model\StatsService
+        arguments: [@service_container]
+
+    sga.admin.exporter:
+        class: Admin\Backend\Model\Exporter
+        arguments: [@service_container]
+
+    app.twig_extension:
+        class: Admin\Twig\StatusExtension
+        public: false
+        tags:
+            - { name: twig.extension }

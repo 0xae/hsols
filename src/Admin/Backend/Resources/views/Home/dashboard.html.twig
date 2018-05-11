@@ -1,0 +1,54 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+{% block title %}GESTÃO DE OCORRÊNCIAS ARFA/Dashboard{% endblock %}
+
+{% block content %}
+
+<div ng-controller="StatisticsController">
+    <div class="row">
+        <div class="col-md-3 pull-right" style="margin-bottom: 20px">
+            <div class="input-group input-group-sm">
+                <span class="input-group-addon " id="sizing-addon3">
+                    <span class="fa fa-calendar"></span>
+                </span>
+                <input class="form-control" type="text" id="daterange" name="daterange" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="margin-top: -28px;">
+            <center>
+                <h4>Número de Ocorrências</h4>
+            </center>
+        </div>
+
+        <div class="col-md-3">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>
+                        {{globalCounters['notConfor']}}
+                    </h3>
+                    <p>Mês: {{month}}</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-thumbs-down"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    N&atilde;o Conformidades
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                </div>
+                <div class="box-body no-padding">
+                    <div id="by_month"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

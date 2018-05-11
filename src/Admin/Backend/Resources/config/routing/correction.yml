@@ -1,0 +1,30 @@
+administration_Correction:
+    path:     /
+    defaults: { _controller: "BackendBundle:Correction:index" }
+
+administration_Correction_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Correction:show" }
+
+administration_Correction_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Correction:new" }
+
+administration_Correction_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Correction:create" }
+    methods:  POST
+
+administration_Correction_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Correction:edit" }
+
+administration_Correction_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Correction:update" }
+    methods:  [POST, PUT]
+
+administration_Correction_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Correction:delete" }
+    methods:  [POST, DELETE]

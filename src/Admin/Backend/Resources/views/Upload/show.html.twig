@@ -1,0 +1,64 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">
+                    <span class="fa fa-file"></span>
+                    Anexo #{{ entity.id }}
+                </h3>
+                
+                <p style="font-size:12px;color:gray">
+                    <span class="fa fa-user"></span>
+                    Criada por {{entity.createdBy.name}}/{{entity.createdBy.entity.name}}
+                </p>
+                
+                <p>
+                    <a href="{{ path('administration_Upload') }}">
+                        <span class="glyphicon glyphicon-back"></span>Voltar
+                    </a>
+                </p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body no-padding">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Descri&ccedil;&atilde;o</th>
+                            <td>{{ entity.description }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Contexto</th>
+                            <td>{{ entity.context }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Ficheiro</th>
+                            <td>
+                                <a href="{{ asset('uploads/generic/' ~ entity.filename) }}" 
+                                target="_blank">
+                                    Ver ficheiro
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Data de criação</th>
+                            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,90 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Nome</label>
+        {{ form_widget(form.name) }}
+    </div>
+
+    <div class="form-group">
+        <label>Email</label>
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+    </div>
+
+    <div class="form-group">
+        <label>Telefone</label>
+        {{ form_widget(form.phone) }}
+    </div>
+
+    <div class="form-group">
+        <label>Morada</label>
+        {{ form_widget(form.address) }}
+    </div>
+
+    <div class="form-group">
+        <label>Estado</label>
+        {{ form_widget(form.isActive) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_widget(form.submit) }}
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Departamento</label>
+        {{ form_widget(form.entity, {
+            'attr' : {
+                'disabled' : is_edit and not (is_granted(expression('"ROLE_ADMIN" in user.getRoles()')))
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        <label>Perfil</label>
+        {{ form_widget(form.profile, {
+            'attr' : {
+                'disabled' : is_edit and not (is_granted(expression('"ROLE_ADMIN" in user.getRoles()')))
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        <label>Username</label>
+        {{ form_widget(form.username, {'attr' : {
+            'disabled': is_edit
+        }}) }}
+        {{ form_errors(form.username) }}
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        {{ form_widget(form.plainPassword, {'attr' : {
+            'disabled': is_edit
+        }}) }}
+        {{ form_errors(form.plainPassword) }}
+    </div>
+
+    <div class="form-group">
+        <label>Password (Confirma&ccedil;&atilde;o)</label>
+        {{ form_widget(form.passwordConf, {'attr' : {
+            'disabled': is_edit
+        }}) }}
+        {{ form_errors(form.passwordConf) }}
+    </div>
+
+    <div class="form-group" style="display:none">
+        <label></label>
+        {{ form_widget(form.photoDir) }}
+        {{ form_widget(form.context) }}
+    </div>
+</div>
+
+<div class="col-md-12">
+    {{ form(form) }}
+</div>
+
+{{ form_end(form) }}

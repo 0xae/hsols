@@ -1,0 +1,30 @@
+administration_ModuleStage:
+    path:     /
+    defaults: { _controller: "BackendBundle:ModuleStage:index" }
+
+administration_ModuleStage_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:ModuleStage:show" }
+
+administration_ModuleStage_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:ModuleStage:new" }
+
+administration_ModuleStage_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:ModuleStage:create" }
+    methods:  POST
+
+administration_ModuleStage_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:ModuleStage:edit" }
+
+administration_ModuleStage_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:ModuleStage:update" }
+    methods:  [POST, PUT]
+
+administration_ModuleStage_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:ModuleStage:delete" }
+    methods:  [GET]

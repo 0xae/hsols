@@ -1,0 +1,41 @@
+<table class="table table-hover table-striped datatable">
+    <thead>
+        <tr>                                        
+            <th>Código #</th>
+            <th>Nome</th>
+            <th>Data de cria&ccedil;&atilde;o</th>
+            <th>Descri&ccedil;&atilde;o</th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>
+                    <a href="{{ path('administration_Profile_edit', { 'id': entity.id }) }}">
+                        #{{ entity.id }}
+                    </a>
+                </td>
+                <td>{{ entity.name }}</td>
+                <td>
+                    {% if entity.createdAt %}
+                        {{ entity.createdAt|date('Y-m-d H:i:s') }}
+                    {% endif %}
+                </td>
+                <td>{{ entity.description }}</td>
+                <td>
+                    <a href="{{ path('administration_Profile_edit', { 'id': entity.id }) }}">
+                        <span class="text-warning fa fa-edit"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{# {{ pagerfanta(profile_fanta, 'twitter_bootstrap3', {
+    'next_message': 'Proximo',
+    'prev_message': 'Anterior',
+    'pageParameter': '[page_profile]'
+    })
+}} #}

@@ -1,0 +1,60 @@
+administration_Sugestion:
+    path:     /
+    defaults: { _controller: "BackendBundle:Sugestion:index" }
+
+administration_Sugestion_excel:
+    path:     /excel
+    defaults: { _controller: "BackendBundle:Sugestion:excelData" }
+
+administration_Sugestion_byState:
+    path:     /by_state/{state}
+    defaults: { _controller: "BackendBundle:Sugestion:byState" }
+
+administration_Sugestion_updateState:
+    path:     /update_state/{id}
+    defaults: { _controller: "BackendBundle:Sugestion:updateState" }
+    methods:  [POST]
+
+administration_Sugestion_respond:
+    path:     /respond/{id}
+    defaults: { _controller: "BackendBundle:Sugestion:respond" }
+    methods:  [POST]
+
+administration_Sugestion_updatePar:
+    path:     /{id}/update_par
+    defaults: { _controller: "BackendBundle:Sugestion:updatePar" }
+
+administration_Sugestion_receipt:
+    path:     /receipt/{id}
+    defaults: { _controller: "BackendBundle:Sugestion:receipt" }
+
+administration_Sugestion_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Sugestion:show" }
+
+administration_Sugestion_showJson:
+    path:     /{id}/json
+    defaults: { _controller: "BackendBundle:Sugestion:showJson" }
+
+administration_Sugestion_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Sugestion:new" }
+
+administration_Sugestion_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Sugestion:create" }
+    methods:  POST
+
+administration_Sugestion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Sugestion:edit" }
+
+administration_Sugestion_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Sugestion:update" }
+    methods:  [POST, PUT]
+
+administration_Sugestion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Sugestion:delete" }
+    methods:  [POST, DELETE]

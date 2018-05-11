@@ -1,0 +1,121 @@
+<div class="modal fade" id="viewCompBook">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header bg-green">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Livro de reclamação</h4>
+        </div>
+            <div class="modal-body">
+                <h3 class="box-title" style="font-weight:bold;margin-top:0px;">
+                    <span>Livro de reclamação</span>
+                    <a href="#">
+                        {{ '{{entity.objCode}}' }}
+                    </a>
+                </h3>
+
+                <p style="font-size:12px;color:gray">
+                    <span class="fa fa-user"></span>
+                    Criada por {{'{{entity.createByName}}'}}/{{'{{entity.createByEnt}}'}}
+                    <br/> <span class="fa fa-calendar"></span> em {{ '{{entity.createdAt}}' }}
+                </p>
+
+                <br/>
+
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Detalhes</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#annex" aria-controls="home" role="tab" data-toggle="tab">Anexos</a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#acomp" aria-controls="home" role="tab" data-toggle="tab">
+                                <span ng-if="!entity.response_author">Acompanhamento</span>
+                                <span ng-if="entity.response_author">Resposta</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="padding:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="form-group">
+                                <label>Nome do utente</label>
+                                <input class="form-control"
+                                    disabled="disabled"
+                                    value="{{ '{{entity.clientName}}' }}"
+                                />
+                                <input class="form-control"
+                                    disabled="disabled"
+                                    value="{{ '{{entity.clientPhone}} / {{entity.clientEmail}}' }}"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nome do fornecedor</label>
+                                <input class="form-control" disabled="disabled" value="{{ '{{entity.supplierName}}' }}" />
+                                <input class="form-control"
+                                    disabled="disabled"
+                                    value="{{ '{{entity.supplierAddress}}' }}"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data da queixa</label>
+                                <input class="form-control"
+                                    disabled="disabled"
+                                    value="{{ '{{entity.complaintDate}}' }}" 
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Descrição da reclamação</label>
+                                <textarea ng-model="entity.complaint"
+                                    disabled="disabled"
+                                    class="form-control"
+                                    rows="5" placeholder="..."></textarea>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="annex">
+                            {{ include('BackendBundle:Upload:listing-ng.html.twig') }}
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="acomp">
+                            {# <h1>Acomp</h1> #}
+                            <div ng-if="entity.response_author">
+                                <div class="form-group">
+                                    <label>Autor da resposta</label>
+                                    <input class="form-control" 
+                                           disabled="disabled" 
+                                           value="{{ '{{entity.response_author}} / {{entity.response_author_entity}}' }}" 
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Data da resposta</label>
+                                    <input class="form-control" 
+                                           disabled="disabled" 
+                                           value="{{ '{{entity.response_date}}' }}" 
+                                    />
+                                </div>
+                            </div>
+
+                            {{ include('BackendBundle:CompBook:modals/updateAcomp.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Fechar
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,27 @@
+<div class="modal fade" id="sugestionAnnexParecerModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header bg-arfa">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Atribuir parecer com Anexo</h4>
+        </div>
+        <div class="modal-body">
+            <label>Sugestao/Reclamacao</label>
+            <input class="form-control" disabled="disabled" value="{{ '{{mObject.code}}' }}" />
+            <br/>
+
+            <div class="form-group">
+                <label>Nome do utente</label>
+                <input class="form-control" disabled="disabled" value="{{ '{{mObject.name}}' }}" />
+            </div>
+
+            {{ 
+                include('BackendBundle:Upload:form.html.twig', {
+                    'form' : upload_form
+                })
+            }}
+        </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

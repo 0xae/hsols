@@ -1,0 +1,4 @@
+# services:
+#   sga.admin.table.pagination:
+#         class: Admin\Backend\Model\Pagination
+#         arguments: [@service_container]

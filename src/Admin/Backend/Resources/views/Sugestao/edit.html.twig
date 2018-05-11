@@ -1,0 +1,93 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<style>
+.form-col {
+    margin-bottom: 10px;
+}
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+        {% for flash_message in app.session.flashBag.get('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
+        <div class="box">
+            <div class="box-header">
+                <p class="pull-right">
+                    <a href="{{ path('administration_sugestao') }}">
+                        <span class="glyphicon glyphicon-back"></span> Voltar
+                    </a>
+                </p>
+
+                <h3 class="">Sugestao</h3>
+                <a href="#">
+                    <strong>{{"%03d"|format(entity.id) }}/SG/CP/{{entity.data|date("Y") }}</strong>
+                </a>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body padding">
+                {{ form_start(edit_form) }}
+                {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+                <div class="row">                
+                    <div class="col-md-6">
+                        <div class="form-col">
+                            {{ form_label(edit_form.nome) }}
+                            {{ form_widget(edit_form.nome) }}
+                            {{ form_errors(edit_form.nome) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(edit_form.email) }}
+                            {{ form_widget(edit_form.email) }}
+                            {{ form_errors(edit_form.email) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(edit_form.morada) }}
+                            {{ form_widget(edit_form.morada) }}
+                            {{ form_errors(edit_form.morada) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(edit_form.telefone) }}
+                            {{ form_widget(edit_form.telefone) }}
+                            {{ form_errors(edit_form.telefone) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">                
+                        <div class="form-col">
+                            {{ form_label(edit_form.descricao) }}
+                            {{ form_widget(edit_form.descricao) }}
+                            {{ form_errors(edit_form.descricao) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(edit_form.data) }}
+                            {{ form_widget(edit_form.data) }}
+                            {{ form_errors(edit_form.data) }}
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {{ form(edit_form) }}
+
+                {{ form_end(edit_form) }}
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+

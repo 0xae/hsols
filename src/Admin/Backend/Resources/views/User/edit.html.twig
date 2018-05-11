@@ -1,0 +1,108 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            {% if user_photo %}                            
+                                <img class="media-object" 
+                                    src="{{ asset('uploads/generic/' ~ user_photo) }}"
+                                    width="50"
+                                    height="50"
+                                    style="border-radius:200px"
+                                    alt="Foto"
+                                />
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <strong>{{entity.name}}</strong>
+                        </h4>
+                        {{entity.email}}
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">
+                                <span>Dados do utilizador</span>
+                            </a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#tab2" aria-controls="home" role="tab" data-toggle="tab">
+                                <span>Adicionar Foto</span>
+                            </a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#tab4" aria-controls="home" role="tab" data-toggle="tab">
+                                <span>Alterar palavra-passe</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="padding:10px;">
+                        <div role="tabpanel" class="tab-pane active" id="tab1">
+                            {{ include('BackendBundle:User:form.html.twig', {'form' : edit_form, 'is_edit': true}) }}
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+                            {{ include('BackendBundle:Upload:form.html.twig', {'form' : photo_form})}}
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab3">
+                            <ul>
+                                {% for p in entity.roles %}
+                                    <li>{{p}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="tab4">
+                            {{ include('BackendBundle:User:changePassword.html.twig', {'form' : change_password_form}) }}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+
+{% block jsCode %}
+<script>
+    $(document).ready(function () {
+        var flashMsg='{{flashMsg}}';
+        var tab='{{tab}}';
+        if (flashMsg) {
+            $.notify(flashMsg,  "success");
+        }
+
+        console.info('tab: ', tab);
+        console.info('flashMsg: ', flashMsg);
+
+        if (tab) {
+            $('a[href="#'+tab+'"]').tab('show');
+        }
+    });
+</script>
+{% endblock %}

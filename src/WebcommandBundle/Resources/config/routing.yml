@@ -1,0 +1,3 @@
+webcommand:
+   resource: "@WebcommandBundle/Controller/"
+   type: annotation

@@ -1,0 +1,77 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<style>
+.form-col {
+    margin-bottom: 10px;
+}
+</style>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Criar Sugestao</h3>
+                <p style="color:gray">Adicionar uma nova sugestao ao sistema</p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                {{ form_start(form) }}
+                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+                <div class="row">                
+                    <div class="col-md-6">
+                        <div class="form-col">
+                            {{ form_label(form.nome) }}
+                            {{ form_widget(form.nome) }}
+                            {{ form_errors(form.nome) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(form.morada) }}
+                            {{ form_widget(form.morada) }}
+                            {{ form_errors(form.morada) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(form.telefone) }}
+                            {{ form_widget(form.telefone) }}
+                            {{ form_errors(form.telefone) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">                
+                        <div class="form-col">
+                            {{ form_label(form.descricao) }}
+                            {{ form_widget(form.descricao) }}
+                            {{ form_errors(form.descricao) }}
+                        </div>
+
+                        <div class="form-col">
+                            {{ form_label(form.data) }}
+                            {{ form_widget(form.data) }}
+                            {{ form_errors(form.data) }}
+                        </div>
+                    </div>
+                </div>
+
+                {{ form(form) }}
+
+                {{ form_end(form) }}
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

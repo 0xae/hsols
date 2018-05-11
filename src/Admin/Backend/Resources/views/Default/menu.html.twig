@@ -1,0 +1,125 @@
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" style="height: auto;">
+        <ul class="sidebar-menu">
+        <li class="header {{ app.request.attributes.get("_route") == 'sga_dashboard' ? 'active' : '' }}" style="padding:0px;">
+            <a href="{{ path('sga_dashboard') }}" class="bg-norm" style="font-weight: bold">
+                <i>
+                <img src="{{ asset('icons/home.svg') }}" width="27" />
+                </i>
+                <span>HOME</span>
+            </a>
+        </li>
+
+        {#  Administracao / Parametrizacao #}
+        <li class="header {{ app.request.attributes.get("_route") == 'backend_administration_main' ? 'active' : '' }}" style="padding:0px;">
+            <a href="javascript:void(0)" class="bg-norm" style="font-weight: bold">
+                <img src="{{ asset('icons/admin.svg') }}" width="25" />
+                <span>ADMINISTRA&Ccedil;&Atilde;O</span>
+            </a>
+
+            <ul class="treeview-menu {{ app.request.attributes.get("_route") == 'backend_administration_main' ? 'active' : '' }}">
+                <li>
+                    <a href="{{ path('backend_administration_main') }}#">
+                    <svg id="meter" class="circle-html5" 
+                        fill={{ app.request.attributes.get("_route") == 'backend_administration_main' ? '#00a65a' : '#ccc' }}>
+                        <circle r="4" cx="50%" cy="50%"></circle>
+                    </svg>
+                    {# <span>{{ app.request.attributes.get("_route") }}</span> #}
+                    <span>Gest&atilde;o de Acesso</span></a>
+                </li>
+
+                <li>
+                    <a href="{{ path('administration_entities') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'administration_entities' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Departamentos</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        {# STOCK #}
+        <li class="header tree-view" style="padding:0px;">
+            <a href="javascript:void(0)" class="bg-norm" style="text-transform: uppercase;font-weight: bold"> {# lazy #}
+                <img src="{{ asset('icons/compbook.svg') }}" width="25" />
+                STOCK
+            </a>
+
+            <ul class="treeview-menu" style="">
+                <li>
+                    <a href="{{ path('administration_Product_new') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Registro</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ path('administration_Product') }}">
+                    <svg id="meter" class="circle-html5" 
+                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                        <circle r="4" cx="50%" cy="50%"></circle>
+                    </svg>
+                    <span>Listagem</span></a>
+                </li>
+            </ul> 
+        </li>
+
+        {# ORDERS #}
+        <li class="header tree-view" style="padding:0px;">
+            <a href="javascript:void(0)" class="bg-norm" style="text-transform: uppercase;font-weight: bold"> {# lazy #}
+                <img src="{{ asset('icons/compbook.svg') }}" width="25" />
+                PEDIDOS
+            </a>
+
+            <ul class="treeview-menu" style="">
+                <li>
+                    <a href="{{ path('administration_Order_new') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Registro</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ path('administration_Order') }}">
+                    <svg id="meter" class="circle-html5" 
+                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                        <circle r="4" cx="50%" cy="50%"></circle>
+                    </svg>
+                    <span>Listagem</span></a>
+                </li>
+
+                <li>
+                    <a href="{{ path('administration_Order') }}">
+                    <svg id="meter" class="circle-html5" 
+                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                        <circle r="4" cx="50%" cy="50%"></circle>
+                    </svg>
+                    <span>Pendentes</span></a>
+                </li>
+            </ul> 
+        </li>
+
+        <li class="header" style="padding:0px;">
+            <a href="{{ path('backend_administration_stats') }}" style="font-weight: bold" class="bg-norm">
+                <img src="{{ asset('icons/statistics.svg') }}" width="25" />
+                RELAT&Oacute;RIO ESTAT&Iacute;STICO
+            </a>
+        </li>
+
+        <li style="padding:0px;">
+        </li>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+
+
+  </aside>

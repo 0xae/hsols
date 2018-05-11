@@ -1,0 +1,68 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+<style>
+ul.pagination {
+    margin-top:0px;
+}
+</style>
+
+<div class="row" ng-controller="NCController">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Listagem de Não Conformidades</h3>
+                <br/>
+                <div class="col-xs-3">
+                    {# <a href="#" class="btn btn-danger app-print-page hidden-print"
+                        title="Imprimir em pdf">
+                        <span class="fa-file-pdf-o"></span>
+                        <strong>PDF</strong>
+                    </a>
+
+                    <a href="{{ path('administration_Sugestion_excel', { 'page': pageIdx }) }}" class="btn btn-success app-print-excel hidden-print"
+                       target="__blank" title="Imprimir em excel">
+                        <span class="fa-file-excel-o"></span>
+                        <strong>EXCEL</strong>
+                    </a> #}
+                    <select ng-model="objectType" class="pull-left form-control" ng-change="fetchType()">
+                        <option value="Sugestion">RECLAMAÇÃO EXTERNA/SUGESTÃO</option>
+                        <option value="Complaint">QUEIXAS/DENÚNCIAS</option>
+                        <option value="IReclamation">RECLAMAÇÃO INTERNA</option>
+                        <option value="CompBook">LIVRO DE RECLAMAÇÕES</option>
+                    </select>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable" id="obj-listing">
+                    <thead>
+                        <tr>                                        
+                            {# <th>Tipo</th> #}
+                            <th>Código #</th>
+                            <th>Data de recepção</th>
+                            <th>Data prevista de resposta</th>
+                            <th>Criado por</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {# <tr ng-repeat="obj in objects">
+                            <td>{{ '{{obj.code}}' }}</td>
+                            <td>{{ '{{obj.date}}' }}</td>
+                            <td>{{ '{{obj.resp_date}}' }}</td>
+                            <td>{{ '{{obj.created_by}}' }}</td>
+                            <td>{{ '{{obj.created_at}}' }}</td>
+                        </tr> #}
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

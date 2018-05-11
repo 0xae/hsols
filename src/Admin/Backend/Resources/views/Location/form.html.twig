@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Ilha</label>
+                {{ form_widget(form.ilha) }}
+            </div>
+
+            <div class="form-group">
+                <label>Concelho</label>
+                {{ form_widget(form.concelho) }}
+            </div>
+            
+            <div class="form-group">
+                <label>Localidade</label>
+                {{ form_widget(form.localidade) }}
+            </div>                
+    
+            {{ form(form) }}
+        </div>
+    </div>    
+{{ form_end(form) }}
+

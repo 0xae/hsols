@@ -1,0 +1,12 @@
+{% extends 'BackendBundle:Default:docs.html.twig' %}
+
+{% block content -%}
+    {% image '@BackendBundle/Resources/public/img/arfa.jpg' %}
+        <img src="{{ asset_url }}" 
+             class="user-image" 
+             width="180" 
+             alt="User Image!" 
+        />
+    {% endimage %}
+    <h1>Parecer</h1>
+{% endblock %}

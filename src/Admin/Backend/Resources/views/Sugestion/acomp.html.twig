@@ -1,0 +1,179 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+
+<div class="row" ng-controller="SugestionAcompController">
+    <div class="col-xs-12">
+        {# <button class="btn btn-default" type="button">Registar reclamacao externa/sugestao</button>
+        <button class="btn btn-default" type="button">Registar reclamacao interna</button> #}
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Em acompanhamento</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable" style="margin-bottom:70px;">
+                    <thead>
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Tipo</th>
+                            <th>Responsável</th>
+                            <th>Data</th>
+                            <th>Data prevista de resposta (15 dias)</th>
+                            <th>Utente</th>
+                            <th>Contato do utente</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in objects %}
+                            <tr id="row-{{entity.id}}">
+                                <td>
+                                    <a href="{{ path('administration_Sugestion_show', { 'id': entity.id }) }}">
+                                        {{ entity.objCode }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% if entity.type == 'reclamacao' %}
+                                        Reclamação
+                                    {% else %}
+                                        Sugestão
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ entity.createdBy.name }}/{{ entity.createdBy.entity.name }}
+                                </td>
+                                <td>
+                                    {{ entity.createdAt|date('Y-m-d') }}
+                                </td>
+                                <td>
+                                    {{ entity.respDate|date('Y-m-d') }}
+                                </td>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.phone ~ '/' }} {{entity.email}}</td>
+                                <td>
+                                    {% if entity.parAuthor %}
+                                        <div class="dropdown" id="row-{{entity.id}}-dispatch" style="display: inline">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Resposta
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                                <li>
+                                                    <a href="#" ng-click="respond({{entity.id}})">Responder</a>                                        
+                                                </li>
+                                                <li>
+                                                    <a href="#" ng-click="noResponse({{entity.id}})">
+                                                        Sem resposta
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <a href="#" ng-click="viewSugestion({{entity.id}})"
+                                            title="Visualizar sugestao">
+                                            <span class="label label-success" style="display:inline">
+                                                Parecer 
+                                                {% if entity.parType == 'par_sec' %}
+                                                    Cient&iacute;fico
+                                                {% elseif entity.parType == 'par_tec' %} 
+                                                    T&eacute;cnico 
+                                                {% else %}
+                                                    C/ Anexo
+                                                {% endif %}
+                                            </span>
+                                        </a>
+                                    {% else %}
+                                        <span id="row-{{entity.id}}-ok" 
+                                            style="display:none" 
+                                            class="label label-success">
+                                            Favoravel
+                                        </span>
+
+                                        <span id="row-{{entity.id}}-not-for-me" 
+                                            style="display:none" 
+                                            class="label label-warning">
+                                            Sem competencia
+                                        </span>
+
+                                        <span id="row-{{entity.id}}-not-favor" 
+                                            style="display:none" 
+                                            class="label label-danger">
+                                            Não Favorável
+                                        </span>
+
+                                        <div id="row-{{entity.id}}-dispatch" class="dropdown" style="display: inline">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Despacho
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                                <li>
+                                                    <a href="#" ng-click="acceptObj({
+                                                        id:{{entity.id}}, 
+                                                        code:'{{entity.objCode}}',
+                                                        name:'{{entity.name}}',
+                                                        email:'{{entity.email}}',
+                                                        phone:'{{entity.phone}}',
+                                                    })">Favor&aacute;vel</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" ng-click="rejectObj({
+                                                        id:{{entity.id}}, 
+                                                        code:'{{entity.objCode}}',
+                                                        name:'{{entity.name}}',
+                                                        email:'{{entity.email}}',
+                                                        phone:'{{entity.phone}}',
+                                                        })">N&atilde;o Favor&aacute;vel</a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" ng-click="markAsNoCompetence('{{entity.objCode}}', {{entity.id}})">
+                                                        Competência de Terceiros
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <a href="#" ng-click="viewSugestion({{entity.id}})"
+                                        title="Visualizar sugestao">
+                                        <span class="text-warning fa fa-eye"></span>
+                                    </a>
+
+                                    {# <a href="{{ path('administration_Sugestion_receipt', { 'id': entity.id }) }}"
+                                        title="Recibo do utente"
+                                        target="_blank">
+                                        <span class="text-warning fa fa-copy"></span>
+                                    </a> #}
+                                    {# <a href="{{ path('administration_Sugestion_edit', { 'id': entity.id }) }}">
+                                        <span class="text-warning fa fa-edit"></span>
+                                    </a> #}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ include('BackendBundle:Sugestion:modals/viewSugestion.html.twig') }}
+                {{ include('BackendBundle:Sugestion:modals/respond.html.twig') }}
+                {{ include('BackendBundle:Sugestion:modals/reject.html.twig') }}
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+        {# {{ pagerfanta(fanta, 'twitter_bootstrap3', {
+            'next_message': 'Proximo',
+            'prev_message': 'Anterior'
+            })
+        }} #}
+    </div>
+</div>
+
+{% endblock %}

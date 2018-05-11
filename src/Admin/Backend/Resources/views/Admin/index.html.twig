@@ -1,0 +1,109 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block title %}GESTÃO DE OCORRÊNCIAS ARFA/Administração{% endblock %}
+
+{% block content -%}
+
+<div class="row" ng-controller="AdminController">
+    <div class="col-md-12">
+        <div class="box">
+            <h3 class="box-title" style="margin-left:20px;margin-bottom:15px;margin-top:10px;">
+                Gestão de Acesso
+            </h3>
+
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="adminTab" style="margin-bottom:20px">
+                    <li role="presentation" 
+                        class="{% if current_tab == 'create_user' %} active {% endif %}">
+                        <a href="#create_user" aria-controls="home" role="tab" data-toggle="tab">
+                        Registar Utilizador
+                        </a>
+                    </li>
+
+                    <li role="presentation"
+                        class="{% if current_tab == 'list_user' %} active {% endif %}">
+                        <a href="#list_user" aria-controls="profile" role="tab" data-toggle="tab">
+                        Listar Utilizador
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a href="#create_profile" aria-controls="messages" role="tab" data-toggle="tab">
+                        Registar perfil
+                        </a>
+                    </li>
+
+                    <li role="presentation"
+                        class="{% if current_tab == 'list_profile' %} active {% endif %}">
+                        <a href="#list_profile" aria-controls="settings" role="tab" data-toggle="tab">
+                        Listar perfil
+                        </a>
+                    </li>
+
+                    <li role="presentation"><a href="#assoc" aria-controls="settings" role="tab" data-toggle="tab">
+                        Associar permiss&atilde;o
+                    </a></li>
+                </ul>
+
+                <div class="box-body table-responsive">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" 
+                             class="tab-pane {% if current_tab == 'create_user' %} active {% endif %}" 
+                             id="create_user">
+                            {{ include('BackendBundle:Admin:create_user.html.twig', {'form' : user_form}) }}
+                        </div>
+
+                        <div role="tabpanel" 
+                             class="tab-pane {% if current_tab == 'list_user' %} active {% endif %}" 
+                             id="list_user">
+                            {{ include('BackendBundle:Admin:list_user.html.twig', {'entities' : user_list}) }}
+                        </div>
+
+                        <div role="tabpanel" 
+                             class="tab-pane" id="create_profile">
+                            {{ include('BackendBundle:Admin:create_profile.html.twig', {'form' : profile_form}) }}
+                        </div>
+
+                        <div role="tabpanel" 
+                             class="tab-pane {% if current_tab == 'list_profile' %} active {% endif %}" 
+                             id="list_profile">
+                            {{ include('BackendBundle:Admin:list_profile.html.twig', {'entities' : profile_list}) }}
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="assoc">
+                            {{
+                                include('BackendBundle:Admin:assoc_permission.html.twig', {
+                                    'form' : assoc_profile_form,
+                                    'profiles' : profile_list,
+                                    'permissions' : permissions
+                                })
+                            }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block jsCode %}
+<script>
+$(document).ready(function (){
+    $("#list_user .pagination li a").on("click", function(e){
+        e.preventDefault();
+        var index=$(this).text();
+        location.href='/arfa/web/app_dev.php/administration/main?page_user='+index+'&tab=list_user';
+    });
+
+    $("#list_profile .pagination li a").on("click", function(e){
+        e.preventDefault();
+        var index=$(this).text();
+        location.href='/arfa/web/app_dev.php/administration/main?page_profile='+index+'&tab=list_profile';
+    });
+});
+</script>
+{% endblock %}

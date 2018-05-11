@@ -1,0 +1,120 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+
+<div class="row" ng-controller="SugestionTreatController">
+    <div class="col-xs-12" ng-init="setType('Sugestion')">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Em Tratamento</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable" style="margin-bottom:70px;">
+                    <thead>
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Responsável</th>
+                            <th>Data</th>
+                            <th>Data Prevista de resposta (15 dias)</th>
+                            <th>Utente</th>
+                            <th>Contato do utente</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in objects %}
+                            <tr id="row-{{entity.id}}">
+                                <td>
+                                    <a href="{{ path('administration_Sugestion_show', { 'id': entity.id }) }}">
+                                        {{ entity.objCode }}
+                                    </a>
+                                </td>
+                                <td>{{ entity.createdBy.name }}/{{ entity.createdBy.entity.name }}</td>
+                                <td>{{ entity.createdAt|date('Y-m-d') }}</td>
+                                <td>{{ entity.respDate|date('Y-m-d') }}</td>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.phone ~ '/' }} {{entity.email}}</td>
+                                <td>
+                                    {# <div class="dropdown" style="display: inline">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Responder
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                            <li>
+                                                <a href="#" ng-click="respondObj({id:{{entity.id}}, name:'{{entity.name}}', phone:'{{entity.phone}}', email:'{{entity.email}}', code:'{{ entity.objCode }}'})">
+                                                    Responder
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" ng-click="noResponseObj({id:{{entity.id}}, name:'{{entity.name}}', phone:'{{entity.phone}}', email:'{{entity.email}}', code:'{{ entity.objCode }}'})">
+                                                    Sem resposta
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div> #}
+                                    <div class="dropdown" id="xop__{{entity.id}}">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Parecer
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                            <li>
+                                                <a href="#" ng-click="openParModal({ id:{{entity.id}}, code:'{{entity.objCode}}', name:'{{entity.name}}', type:'par_tec' })">
+                                                    T&eacute;cnico
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" ng-click="openParModal({ id:{{entity.id}}, code:'{{entity.objCode}}', name:'{{entity.name}}', type:'par_cent' })">
+                                                    Cient&iacute;fico
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" ng-click="openAnnexParModal({ id:{{entity.id}}, code:'{{entity.objCode}}', name:'{{entity.name}}', annexReference:'{{entity.annexReference}}', type:'par_annex' })">
+                                                    Anexo
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="viewSugestion({{entity.id}}, '{{entity.type}}')">
+                                        <span class="text-warning fa fa-eye"></span>
+                                    </a>
+
+                                    {# <a href="{{ path('administration_Sugestion_receipt', { 'id': entity.id }) }}"
+                                        title="Recibo do utente"
+                                        target="_blank">
+                                        <span class="text-warning fa fa-copy"></span>
+                                    </a> #}
+                                    {# <a href="{{ path('administration_Sugestion_edit', {'id':entity.id})}}" style="font-size:16px">
+                                        <span class="text-warning fa fa-edit"></span>
+                                    </a> #}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ include('BackendBundle:Sugestion:modals/viewSugestion.html.twig') }}
+                {{ include('BackendBundle:Sugestion:modals/updatePar.html.twig') }}
+                {{ include('BackendBundle:Sugestion:modals/updateParAnnex.html.twig') }}
+                {{ include('BackendBundle:Sugestion:modals/respond.html.twig') }}
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+        {# {{ pagerfanta(fanta, 'twitter_bootstrap3', {
+            'next_message': 'Proximo',
+            'prev_message': 'Anterior'
+            })
+        }} #}
+    </div>
+</div>
+
+{% endblock %}

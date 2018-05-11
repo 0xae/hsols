@@ -1,0 +1,167 @@
+<div class="modal fade" id="viewComplaintModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header bg-arfa">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">
+                Visualizando
+                <span ng-if="entity.type == 'queixa'">Queixa</span>
+                <span ng-if="entity.type == 'denuncia'">Den&uacute;ncia</span>
+            </h4>
+        </div>
+        <form ng-submit="respondSubmit()" name="responseForm">
+        <div class="modal-body">
+            <h3 class="box-title" style="font-weight:bold;margin-top:0px;">
+                <span ng-if="entity.type == 'queixa'">Queixa</span>
+                <span ng-if="entity.type == 'denuncia'">Den&uacute;ncia</span>
+
+                <a href="#">
+                {{ '{{entity.objCode}}' }}
+                </a>
+            </h3>
+
+            <p style="font-size:12px;color:gray">
+                <span class="fa fa-user"></span>
+                Criada por {{'{{entity.createByName}}'}}/{{'{{entity.createByEnt}}'}}
+            </p>
+
+            <br/>
+
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                            <span ng-if="entity.type == 'queixa'">Queixa</span>
+                            <span ng-if="entity.type == 'denuncia'">Den&uacute;ncia</span>
+                        </a>
+                    </li>
+                    <li role="presentation" ng-if="entity.parAuthorName">
+                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                        Parecer
+                        <span ng-if="entity.parType == 'par_annex'">
+                            com Anexo
+                        </span>
+                        <span ng-if="entity.parType == 'par_tec'">
+                            T&eacute;cnico
+                        </span>
+                        <span ng-if="entity.parType == 'par_cent'">
+                            Cientifico
+                        </span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#annex" aria-controls="profile" role="tab" data-toggle="tab">Anexos</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" style="padding:10px;">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        <div class="form-group">
+                            <label>Nome do utente</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{entity.name}}' }}" />
+                            <input class="form-control" 
+                                disabled="disabled" 
+                                    value="{{ '{{entity.phone}} / {{entity.email}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nome da entidade</label>
+                            <input class="form-control" disabled="disabled" value="{{ '{{entity.opName}}' }}" />
+                            <input class="form-control" 
+                                disabled="disabled" 
+                                    value="{{ '{{entity.opPhone}} / {{entity.opEmail}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data da 
+                                <span ng-if="entity.type == 'queixa'">Queixa</span>
+                                <span ng-if="entity.type == 'denuncia'">Den&uacute;ncia</span>
+                            </label>
+                            <input class="form-control" 
+                                disabled="disabled" 
+                                value="{{ '{{entity.factDate.date}}' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <span ng-if="entity.type == 'queixa'">Queixa</span>
+                                <span ng-if="entity.type == 'denuncia'">Den&uacute;ncia</span>
+                            </label>
+                            <textarea ng-model="entity.factDetail"
+                                disabled="disabled" 
+                                class="form-control"
+                                rows="5" placeholder="..."></textarea>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="profile">
+                        <div class="form-group">
+                            <label>Autor do parecer</label>
+                            <input class="form-control" disabled value="{{'{{entity.parAuthorName}}'}}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Data</label>
+                            <input class="form-control" disabled value="{{'{{entity.parDate}}'}}" />
+                        </div>
+
+                        <div ng-if="entity.parType != 'par_annex'">
+                            <div class="form-group">
+                                <label>C&oacute;digo PT</label>
+                                <input class="form-control" disabled value="{{'{{entity.parCode}}'}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Assunto</label>
+                                <input class="form-control" disabled value="{{'{{entity.parSubject}}'}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Destinat&aacute;rios</label>
+                                <textarea 
+                                    ng-model="entity.parDest" disabled
+                                    class="form-control"
+                                    rows="2" placeholder="..."></textarea>
+                            </div>
+
+                            <label>Texto do parecer (<span style="color:orangered">*</span>)</label>
+                            <textarea ng-model="entity.parDescription"
+                                disabled class="form-control"
+                                rows="5"></textarea>
+                        </div>
+
+                        <div ng-if="entity.parType == 'par_annex'">
+                            <div class="form-group">
+                                <label>Anexo</label>
+                                <table class="table">
+                                    <tbody>
+                                        <tr ng-repeat="f in annexFiles">
+                                            <td></td>
+                                            <td>{{ '{{ f.description }}' }}</td>
+                                            <td>
+                                                <a href="{{ asset('uploads/generic/') }}{{'{{f.filename}}'}}" target="_blank">
+                                                    Ver ficheiro
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="annex">
+                        {{ include('BackendBundle:Upload:listing-ng.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+        </div>
+        </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

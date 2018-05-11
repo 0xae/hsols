@@ -1,0 +1,30 @@
+administration_Category:
+    path:     /
+    defaults: { _controller: "BackendBundle:Category:index" }
+
+administration_Category_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Category:show" }
+
+administration_Category_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Category:new" }
+
+administration_Category_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Category:create" }
+    methods:  POST
+
+administration_Category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Category:edit" }
+
+administration_Category_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Category:update" }
+    methods:  [POST, PUT]
+
+administration_Category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Category:delete" }
+    methods:  [POST, DELETE]

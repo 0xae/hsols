@@ -1,0 +1,34 @@
+administration_user:
+    path:     /
+    defaults: { _controller: "BackendBundle:User:index" }
+
+administration_user_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:User:show" }
+
+administration_user_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:User:new" }
+
+administration_user_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:User:create" }
+    methods:  POST
+
+administration_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:User:edit" }
+
+# administration_user_changePassword:
+#     path:     /changePassword
+#     defaults: { _controller: "BackendBundle:User:changePassword" }
+
+administration_user_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:User:update" }
+    methods:  [POST, PUT]
+
+administration_user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:User:delete" }
+    methods:  [POST, DELETE]

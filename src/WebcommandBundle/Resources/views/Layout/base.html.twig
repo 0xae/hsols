@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}WebCommand{% endblock %}</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% stylesheets 
+            '@WebcommandBundle/Resources/public/vendors/bootstrap/css/bootstrap.min.css'
+            '@WebcommandBundle/Resources/public/css/*'
+        %}
+
+            <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+
+        {% endstylesheets %}
+
+        {% block stylesheets %}
+        {% endblock %}
+
+        
+        {% javascripts
+            '@WebcommandBundle/Resources/public/js/jquery.min.js'
+            '@WebcommandBundle/Resources/public/vendors/bootstrap/js/bootstrap.min.js'
+            '@WebcommandBundle/Resources/public/js/functions.js'
+            
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+
+        {% block javascript %}
+        {% endblock %}
+        </head>
+
+        <body>
+            <div class="container"> 
+                    {% block body %}
+                    {% endblock %}
+             </div>   
+         </body>
+ </html>

@@ -1,0 +1,76 @@
+{% extends 'BackendBundle:Default:docs.html.twig' %}
+
+{% block title %}Recibo de ocorrência a terceiros {% endblock %}
+
+{% block content -%}
+<div>
+    {% image '@BackendBundle/Resources/public/img/arfa.jpg' %}
+        <img src="{{ asset_url }}" 
+             class="user-image" 
+             width="180" 
+             alt="User Image!" 
+        />
+    {% endimage %}
+
+    <center>
+        <h3 class="box-title" style="font-weight:bold">
+            Envio de Ocorrência a Terceiros
+        </h3>
+    </center>
+
+    <table class="table table-hover table-striped" style="margin-bottom:70px">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Numero do Registo</td>
+                <td>
+                    #{{ entity.objCode }}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Data da resposta</td>
+                <td>
+                    {{ entity.factDate|date('Y-m-d') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Resposta</h4>
+    <div id="msgContainer">
+        <textarea rows="5" class="form-control" id="msg"></textarea>
+    </div>
+
+    <div style="margin-top:70px;">
+        <p style="font-size:12px;color:gray">
+            <span class="fa fa-user"></span>
+            Criado por {{entity.createdBy.name}}/{{entity.createdBy.entity.name}}
+            <br/> <span class="fa fa-calendar"></span> em {{entity.createdAt|date('Y-m-d')}}
+        </p>
+    </div>
+
+    <button id="printMe" class="btn btn-primary hidden-print">
+        Imprimir
+    </button>
+</div>
+{% endblock %}
+
+
+{% block jsCode -%}
+    <script>
+        $("#printMe").click(function () {
+            if (!confirm("Deseja mesmo imprimir o recibo")) {
+                return;
+            }
+            window.print();
+            var msg=$("#msg").val();
+            $("#msgContainer")
+        })
+    </script>
+{% endblock %}

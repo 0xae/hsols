@@ -1,0 +1,21 @@
+{% extends 'BackendBundle:Default:base.html.twig' %}
+{% block title %}GESTÃO DE OCORRÊNCIAS ARFA{% endblock %}
+
+{% block body %}
+    <header class="main-header" style="background-color: #fff;">
+        {# navbar  #}
+        {{ include('BackendBundle:Default:navbar.html.twig') }}
+    </header>
+    <!-- end header -->
+
+    {# menu #}
+    {{ include('BackendBundle:Default:menu.html.twig') }}
+
+    {# page content #}
+    <div class="content-wrapper" style="min-height: 916px;">
+        <section class="content">
+            {% block content %}
+            {% endblock %}
+        </section>
+    </div>
+{% endblock %}

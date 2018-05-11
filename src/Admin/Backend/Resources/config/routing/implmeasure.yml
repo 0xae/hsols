@@ -1,0 +1,30 @@
+administration_ImplMeasure:
+    path:     /
+    defaults: { _controller: "BackendBundle:ImplMeasure:index" }
+
+administration_ImplMeasure_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:ImplMeasure:show" }
+
+administration_ImplMeasure_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:ImplMeasure:new" }
+
+administration_ImplMeasure_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:ImplMeasure:create" }
+    methods:  POST
+
+administration_ImplMeasure_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:ImplMeasure:edit" }
+
+administration_ImplMeasure_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:ImplMeasure:update" }
+    methods:  [POST, PUT]
+
+administration_ImplMeasure_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:ImplMeasure:delete" }
+    methods:  [POST, DELETE]

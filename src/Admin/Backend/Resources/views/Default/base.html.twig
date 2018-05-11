@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <title>
+          {% block title %}Bem vindo!{% endblock %}
+        </title>
+
+        {% stylesheets
+            '@BackendBundle/Resources/public/css/bootstrap.min.css'
+            '@BackendBundle/Resources/public/css/font-awesome.min.css'
+            '@BackendBundle/Resources/public/css/ionicons.min.css'
+            '@BackendBundle/Resources/public/css/jquery-jvectormap-1.2.2.css'
+            '@BackendBundle/Resources/public/css/AdminLTE.min.css'
+            '@BackendBundle/Resources/public/css/blue.css'
+            '@BackendBundle/Resources/public/css/pace.min.css'
+            '@BackendBundle/Resources/public/css/_all-skins.min.css'
+            '@BackendBundle/Resources/public/css/app.css'
+            '@BackendBundle/Resources/public/css/daterangepicker.css'
+            '@BackendBundle/Resources/public/lib/editor/trumbowyg.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('public/lib/datatable/css/jquery.dataTables.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('public/lib/datatable/css/dataTables.bootstrap.css') }}" />
+        <style>
+            .loading { 
+                position: fixed; 
+                left: 0px; 
+                top: 0px; 
+                width: 100%; 
+                height: 100%; 
+                z-index: 9999; 
+                background: 
+                    {% image '@BackendBundle/Resources/public/img/loading.gif' %}
+                    url({{ asset_url }}) center no-repeat #fff; 
+                    {% endimage %}                
+            }
+
+            h3.app-title {
+                margin: 0px;
+                margin-top: 15px;
+                text-align: center;
+                font-size: 21px;
+                font-weight: bold;
+            }
+            .bg-arfa {
+                background-color: #999;
+            }
+            .bg-denounce {
+                background-color: #c82061 !important;
+            }
+            .bg-sugestion {
+                background-color: #1155cc;
+            }
+            .bg-complaint {
+                background-color: #681133;
+            }
+            .bg-comp-book { 
+                background-color: #f39c12;
+                color: #fff;
+            }
+            .bg-intern-recl {
+                background-color: #6eb63e;
+            }
+            .bg-extern-recl {
+                background-color: #4e802c;
+            }
+            .small-box .inner {
+                color: #fff;
+            }
+            .response-area textarea {                
+            }
+            .sf-toolbar {
+                display: none !important;
+            }
+            .app-footer {
+                /*position:fixed;*/
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #fff;
+                color: #fff;
+                text-align: center;
+                padding: 8px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .circle-html5 {
+                float: left;
+                width: 10px;
+                height: 10px;
+                margin-top: 5px;
+                margin-right: 5px;
+            }
+            .dataTables_length,
+            .dataTables_info {
+                display: none;
+            }
+            table.dataTable thead .sorting::after, 
+            table.dataTable thead .sorting_asc::after, 
+            table.dataTable thead .sorting_dec::after {
+                content: "";
+            }
+            .dataTables_wrapper {
+                margin-bottom: 70px;
+            }
+            .msg-recep {
+            }
+            li .header a {
+                font-weight: bold;
+            }
+            body {
+            }
+            .main-header > .navbar {
+                min-height: 55px;
+            }
+            .navbar-nav > .user-menu .user-image {
+                margin-right: 0px;
+                margin-top: 0px;
+            }
+            .main-sidebar, .left-side {
+                width: 300px;
+            }
+            .content-wrapper, .right-side, .main-footer {
+                margin-left: 301px;
+            }
+            .bg-norm {
+                background-color: #222d32;
+            }
+            .sidebar ul li a {
+                padding-left: 15px;
+            }
+            .sidebar ul li a img {
+                margin-right: 14px;
+            }
+            body.sidebar-collapse {
+                background-color: #ecf0f5;
+            }
+            body.sidebar-collapse aside {
+                display: none;
+            }
+
+            body.sidebar-collapse section.content {
+                margin-left: -30px;
+            }
+            span.fa-circle {
+                font-size: 10px;
+                margin-right: 5px;
+            }
+            .active-search {
+                background-color: #00a65a !important;
+            }
+        </style>
+    </head>
+
+    <body class="skin-blue sidebar-mini pace-done fixed" ng-app="app">
+        <div class="loading"></div>
+
+        {% block body %}
+            <div class="wrapper">
+            </div>
+        {% endblock %}
+
+        {% javascripts
+            '@BackendBundle/Resources/public/js/jQuery-2.2.0.min.js'
+            '@BackendBundle/Resources/public/js/bootstrap.min.js'
+            '@BackendBundle/Resources/public/js/fastclick.js'
+            '@BackendBundle/Resources/public/js/app.min.js'
+            '@BackendBundle/Resources/public/js/jquery.sparkline.min.js'
+            '@BackendBundle/Resources/public/js/jquery-jvectormap-1.2.2.min.js'
+            '@BackendBundle/Resources/public/js/jquery-jvectormap-world-mill-en.js'
+            '@BackendBundle/Resources/public/js/jquery.slimscroll.min.js'
+            '@BackendBundle/Resources/public/js/Chart.min.js'
+            '@BackendBundle/Resources/public/js/demo.js'
+            '@BackendBundle/Resources/public/js/pace.min.js'
+            '@BackendBundle/Resources/public/js/moment.min.js'
+            '@BackendBundle/Resources/public/js/lodash.js'
+            '@BackendBundle/Resources/public/js/icheck.min.js'
+            '@BackendBundle/Resources/public/js/notify.js'
+            '@BackendBundle/Resources/public/js/highcharts/highcharts.js'
+            '@BackendBundle/Resources/public/js/highcharts/exporting.js'
+            '@BackendBundle/Resources/public/js/highcharts/series-label.js'
+            '@BackendBundle/Resources/public/lib/editor/trumbowyg.min.js'
+            '@BackendBundle/Resources/public/js/angular.min.js'
+            '@BackendBundle/Resources/public/js/daterangepicker.js'
+
+            '@BackendBundle/Resources/public/js/app/app.js'
+            '@BackendBundle/Resources/public/js/app/admin/service.js'
+            '@BackendBundle/Resources/public/js/app/admin/controller.js'
+            '@BackendBundle/Resources/public/js/app/statistics/service.js'
+            '@BackendBundle/Resources/public/js/app/statistics/controller.js'
+
+            '@BackendBundle/Resources/public/js/app/sugestion/controller.js'
+            '@BackendBundle/Resources/public/js/app/sugestion/acompanhamento.js'
+            '@BackendBundle/Resources/public/js/app/sugestion/tratamento.js'
+            '@BackendBundle/Resources/public/js/app/sugestion/service.js'
+
+            '@BackendBundle/Resources/public/js/app/compbook/controller.js'
+            '@BackendBundle/Resources/public/js/app/compbook/service.js'
+
+            '@BackendBundle/Resources/public/js/app/complaint/controller.js'
+            '@BackendBundle/Resources/public/js/app/complaint/service.js'
+            '@BackendBundle/Resources/public/js/app/complaint/acompanhamento.js'
+            '@BackendBundle/Resources/public/js/app/complaint/tratamento.js'
+
+            '@BackendBundle/Resources/public/js/app/ireclamation/controller.js'
+            '@BackendBundle/Resources/public/js/app/nc/controller.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% block jsCode %}
+            <div class="wrapper">
+            </div>
+        {% endblock %}
+
+        <div class="app-footer" style="background-color: #242729;">
+            <div style="margin-left: 230px;padding: 5px;">
+                <center>
+                    <img src="{{ asset('icons/whitearfa.png') }}"
+                        class="user-image"
+                        alt="User Image!"
+                        width="120"
+                    />
+                </center>
+            </div>
+        </div>
+
+        <script src="{{ asset('public/lib/datatable/js/jquery.dataTables.min.js') }}"></script>
+    </body>
+</html>

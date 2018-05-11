@@ -1,0 +1,83 @@
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>                                        
+            <th>Etapa</th>
+            <th>Intervenientes</th>
+            <th>Criado por</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ms in stages %}
+            <tr>                                                                                    
+                <td>
+                    <a href="#">
+                        {{ ms.stage.name }}
+                    </a>
+                </td>
+                <td>
+                    {% if edit_stage %}
+                    <a class="badge badge-primary" ng-click="log({{ms.stage.id}})" data-toggle="modal" data-target="#example-modal">
+                     associar perfil
+                    </a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="#">
+                        <span class="">{{ ms.createdBy.name|capitalize }}</span>
+                    </a>                    
+                </td>
+                <td>
+                    <a href="#" ng-click="removeMs('{{path('administration_ModuleStage_delete', {'id':ms.id})}}')">
+                        <span class="fa fa-remove text-danger"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if edit_stage %}
+
+<div class="example-modal">
+    <div class="modal fade" id="example-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Adicionar perfil a etapa</h4>
+                </div>
+
+                <div class="modal-body">
+                    {{ form_start(stage_profile) }}
+                    {% form_theme stage_profile 'bootstrap_3_layout.html.twig' %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Etapa</label>
+                                {{ form_widget(stage_profile.moduleStage) }}
+                            </div>
+
+                            <div class="col-md-3">
+                                <label>Perfil</label>
+                                {{ form_widget(stage_profile.profile) }}
+                            </div>
+                            {{ form(stage_profile) }}
+                        </div>
+                    {{ form_end(stage_profile) }}
+                </div>
+
+                {# <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div> #}
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+{% endif %}
+

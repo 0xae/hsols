@@ -1,0 +1,84 @@
+{{ form_start(form) }}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div role="tabpanel" class="wizard-tab">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        {% if view == 'edit' or view == 'analysis'  %}
+            <li role="presentation" 
+                class="{%if view=='edit'%}active{%endif%}">
+                <a href="#frm_tab1" aria-controls="home" role="tab" data-toggle="tab">
+                    <span>Registro</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% if view == 'analysis' or view == 'decision' %}
+            <li role="presentation"
+                class="{%if view=='analysis'%}active{%endif%}">
+                <a href="#frm_tab2" aria-controls="home"                    
+                    role="tab" data-toggle="tab">
+                    <span>Análise da Reclamação</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% if view == 'decision' or view == 'action' %}
+            <li role="presentation"
+                class="{%if view=='decision'%}active{%endif%}">
+                <a href="#frm_tab3" aria-controls="home"
+                    role="tab" data-toggle="tab">
+                    <span>Decisão a ser tomada</span>
+                </a>
+            </li>
+        {% endif %}
+ 
+        {% if view == 'action' %}
+            <li role="presentation"
+                class="{%if view=='action'%}active{%endif%}">
+                <a href="#frm_tab4" aria-controls="home"
+                    role="tab" data-toggle="tab">
+                    <span>Ação a ser tomada</span>
+                </a>
+            </li> 
+        {% endif %}
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" style="padding:10px;">
+        <div role="tabpanel"
+             class="tab-pane {%if view=='edit'%}active{%endif%}"
+             id="frm_tab1">
+            {{ include('BackendBundle:IReclamation:steps/register.html.twig') }}
+        </div>
+
+        <div role="tabpanel"
+             class="tab-pane {%if view=='analysis'%}active{%endif%}"
+             id="frm_tab2">
+            <h3>Análise da Reclamação</h3>
+            {{ include('BackendBundle:IReclamation:steps/analysis.html.twig') }}
+        </div>
+
+        <div role="tabpanel"
+             class="tab-pane {%if view=='decision'%}active{%endif%}"
+             id="frm_tab3">
+            <h3>Decisão a ser tomada</h3>
+            {{ include('BackendBundle:IReclamation:steps/decision.html.twig') }}
+        </div>
+
+        <div role="tabpanel"
+             class="tab-pane {%if view=='action'%}active{%endif%}"
+             id="frm_tab4">
+            <h3>Ação a ser tomada</h3>
+            {{ include('BackendBundle:IReclamation:steps/action.html.twig') }}
+        </div>
+    </div>
+</div>
+
+<div class="hidden">
+{{ form_widget(form.createdBy) }}
+</div>
+
+{{ form(form) }}
+
+{{ form_end(form) }}

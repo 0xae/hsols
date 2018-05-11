@@ -1,0 +1,137 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content -%}
+
+<div class="row" ng-controller="CompAcompController">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Em acompanhamento</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover table-striped datatable" style="margin-bottom:70px">
+                    <thead>
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Tipo</th>
+                            <th>Responsável</th>
+                            <th>Data</th>
+                            <th>Data de resposta (15 dias)</th>
+                            <th>Utente</th>
+                            <th>Contato do utente</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in objects %}
+                            <tr id="row-{{entity.id}}">
+                                <td>
+                                    <a href="{{ path('administration_Complaint_edit', { 'id': entity.id }) }}">
+                                        {{ entity.objCode }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {% if entity.type == 'queixa' %}
+                                        Queixa
+                                    {% else %}
+                                        Denuncia
+                                    {% endif %}
+                                </td>
+                                <td>{{ entity.createdBy.name }}/{{ entity.createdBy.entity.name }}</td>
+                                <td>{{ entity.createdAt|date('Y-m-d') }}</td>
+                                <td>{{ entity.respDate|date('Y-m-d') }}</td>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.phone ~ '/' }} {{entity.email}}</td>
+                                <td>
+                                    <span id="row-{{entity.id}}-no-comp" 
+                                        style="display:none" 
+                                        class="label label-warning">
+                                        Competencia de terceiros
+                                    </span>
+
+                                    {% if entity.parAuthor %}
+                                        <div class="dropdown" style="display: inline">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Resposta
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                                <li>
+                                                    <a href="#" ng-click="respond({{entity.id}})">Resposta</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" ng-click="noResponse({{entity.id}})">Sem resposta</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <br/>
+                                        <a href="{{ path('administration_Complaint_parecer', {'id': entity.id}) }}" target="_blank">
+                                            <span class="label label-success" style="display:inline">
+                                                Parecer {{entity.parCode}}
+                                            </span>
+                                        </a>
+                                    {% else %}
+                                        <div class="dropdown" style="display: inline" id="row-{{entity.id}}-dispatch">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Despacho
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="min-width: 120px;">
+                                                <li>
+                                                    <a href="#" ng-click="acceptObj({
+                                                        id:{{entity.id}}, 
+                                                        code:'{{entity.objCode}}',
+                                                        name:'{{entity.name}}',
+                                                        email:'{{entity.email}}',
+                                                        phone:'{{entity.phone}}',
+                                                    })">Favor&aacute;vel</a>                                        
+                                                </li>
+                                                <li >
+                                                    <a href="#" ng-click="rejectObj({
+                                                        id:{{entity.id}}, 
+                                                        code:'{{entity.objCode}}',
+                                                        name:'{{entity.name}}',
+                                                        email:'{{entity.email}}',
+                                                        phone:'{{entity.phone}}',
+                                                        })">N&atilde;o Favor&aacute;vel</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" ng-click="markAsNoCompetence('{{entity.objCode}}',{{entity.id}})">
+                                                        Competencia de terceiros
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="#" ng-click="viewComplaint({{entity.id}})"
+                                        title="Visualizar">
+                                        <span class="text-warning fa fa-eye"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+
+                {{ include('BackendBundle:Complaint:modals/viewComplaint.html.twig') }}
+                {{ include('BackendBundle:Complaint:modals/respond.html.twig') }}
+                {{ include('BackendBundle:Complaint:modals/reject.html.twig') }}
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        {# {{ pagerfanta(fanta, 'twitter_bootstrap3', {
+            'next_message': 'Proximo',
+            'prev_message': 'Anterior'
+            })
+        }} #}
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Correction #{{ entity.id }}</h3>
+                <p>
+                    <a href="{{ path('administration_Correction') }}">
+                        <span class="glyphicon glyphicon-back"></span> Voltar
+                    </a>
+                </p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body no-padding">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ entity.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Source</th>
+                            <td>{{ entity.source }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actiondescription</th>
+                            <td>{{ entity.actionDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actiontype</th>
+                            <td>{{ entity.actionType }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actiondate</th>
+                            <td>{{ entity.actionDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Causedescription</th>
+                            <td>{{ entity.causeDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Causedate</th>
+                            <td>{{ entity.causeDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Impldate</th>
+                            <td>{{ entity.implDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closefinished</th>
+                            <td>{{ entity.closeFinished }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closedate2</th>
+                            <td>{{ entity.closeDate2|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closeeficacy</th>
+                            <td>{{ entity.closeEficacy }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closeaction</th>
+                            <td>{{ entity.closeAction }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closeindate</th>
+                            <td>{{ entity.closeInDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Closedate</th>
+                            <td>{{ entity.closeDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createdat</th>
+                            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+

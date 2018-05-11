@@ -1,0 +1,30 @@
+administration_Document:
+    path:     /
+    defaults: { _controller: "BackendBundle:Document:index" }
+
+administration_Document_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Document:show" }
+
+administration_Document_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Document:new" }
+
+administration_Document_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Document:create" }
+    methods:  POST
+
+administration_Document_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Document:edit" }
+
+administration_Document_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Document:update" }
+    methods:  [POST, PUT]
+
+administration_Document_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Document:delete" }
+    methods:  [POST, DELETE]

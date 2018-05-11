@@ -1,0 +1,87 @@
+{% extends 'BackendBundle:Default:layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">IReclamation #{{ entity.id }}</h3>
+                <p>
+                    <a href="{{ path('administration_IReclamation') }}">
+                        <span class="glyphicon glyphicon-back"></span> Voltar
+                    </a>
+                </p>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body no-padding">
+                <table class="table table-hover table-striped">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ entity.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ entity.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Direction</th>
+                            <td>{{ entity.direction }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ entity.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Factdate</th>
+                            <td>{{ entity.factDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Factdetail</th>
+                            <td>{{ entity.factDetail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Analysisdetail</th>
+                            <td>{{ entity.analysisDetail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Analysisdate</th>
+                            <td>{{ entity.analysisDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Decisiondetail</th>
+                            <td>{{ entity.decisionDetail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Decisiondate</th>
+                            <td>{{ entity.decisionDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actiondetail</th>
+                            <td>{{ entity.actionDetail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actiondate</th>
+                            <td>{{ entity.actionDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createdat</th>
+                            <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createdby</th>
+                            <td>{{ entity.createdBy }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
+{% endblock %}
+

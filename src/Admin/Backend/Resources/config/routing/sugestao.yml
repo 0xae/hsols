@@ -1,0 +1,30 @@
+administration_sugestao:
+    path:     /
+    defaults: { _controller: "BackendBundle:Sugestao:index" }
+
+administration_sugestao_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Sugestao:show" }
+
+administration_sugestao_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Sugestao:new" }
+
+administration_sugestao_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Sugestao:create" }
+    methods:  POST
+
+administration_sugestao_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Sugestao:edit" }
+
+administration_sugestao_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Sugestao:update" }
+    methods:  [POST, PUT]
+
+administration_sugestao_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Sugestao:delete" }
+    methods:  [POST, DELETE]

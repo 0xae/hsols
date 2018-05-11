@@ -1,0 +1,30 @@
+administration_UserProfile:
+    path:     /
+    defaults: { _controller: "BackendBundle:UserProfile:index" }
+
+administration_UserProfile_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:UserProfile:show" }
+
+administration_UserProfile_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:UserProfile:new" }
+
+administration_UserProfile_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:UserProfile:create" }
+    methods:  POST
+
+administration_UserProfile_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:UserProfile:edit" }
+
+administration_UserProfile_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:UserProfile:update" }
+    methods:  [POST, PUT]
+
+administration_UserProfile_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:UserProfile:delete" }
+    methods:  [POST, DELETE]

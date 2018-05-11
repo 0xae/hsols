@@ -1,0 +1,89 @@
+{% extends 'BackendBundle:Default:docs.html.twig' %}
+
+{% block content -%}
+
+    {% image '@BackendBundle/Resources/public/img/arfa.jpg' %}
+        <img src="{{ asset_url }}" 
+             class="user-image" 
+             width="180" 
+             alt="Logo da ARFA" 
+        />
+    {% endimage %}
+
+    <center>
+        <h3 class="box-title" style="font-weight:bold">
+            {% if entity.type == 'queixa' %}
+                Queixa
+            {% else %}
+                Den&uacute;ncia
+            {% endif %}
+
+            <a href="#">
+            #{{ entity.objCode }}
+            </a>
+        </h3>
+
+        <h3>
+            Parecer
+            {% if entity.parType == 'par_cent' %}
+                TÉCNICO CIENTIFICO
+            {% else %}
+                TÉCNICO
+            {% endif %}    
+        </h3>
+    </center>
+
+    <table class="table table-hover table-striped" style="margin-bottom:70px">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PARECER</td>
+                <td>{{entity.parCode}}</td>
+            </tr>
+
+            <tr>
+                <td>ASSUNTO</td>
+                <td>{{entity.parSubject}}</td>
+            </tr>
+
+            <tr>
+                <td>DATA</td>
+                <td>{{ entity.parDate|date('Y-m-d') }}</td>
+            </tr>
+
+            <tr>
+                <td>DESTINATÁRIOS</td>
+                <td>{{entity.parDest}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Texto do parecer</h4>
+    <div class="well">
+        {{entity.parDescription}}
+    </div>
+
+    <div style="margin-top:70px;">
+        <p style="font-size:12px;color:gray">
+            <span class="fa fa-user"></span>
+            Criada por {{entity.parAuthor.name}}/{{entity.parAuthor.entity.name}}
+        </p>
+
+        <button id="printMe" class="btn btn-primary hidden-print">
+            Imprimir
+        </button>
+    </div>
+{% endblock %}
+
+{% block jsCode -%}
+    <script>
+        $("#printMe").click(function () {
+            window.print();
+        })
+    </script>
+{% endblock %}

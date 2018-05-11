@@ -1,0 +1,46 @@
+{% extends 'WebcommandBundle:Layout:base.html.twig' %}
+{% block body %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">WebCommand</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal" action="{{path('commandrunner', {'commandName':'cache:clear'})}}" method="POST">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Select Options</legend>
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-6 control-label" for="singlebutton">Limpar cache</label>
+                    <div class="col-md-6">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Limpar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <form class="form-horizontal" action="{{path('commandrunner', {'commandName':'doctrine:schema:update --force '})}}" method="POST">
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-6 control-label" for="singlebutton">Actualizar Base de dados</label>
+                <div class="col-md-6">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Actualizar</button>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" action="{{path('commandrunner', {'commandName':'assets:install'})}}" method="POST">
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-6 control-label" for="singlebutton">Install Assets</label>
+                <div class="col-md-6">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Install</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<footer>
+    <p>&copy; Badiu.net</p>
+</footer>
+{% endblock %}
