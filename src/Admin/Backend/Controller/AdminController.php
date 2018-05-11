@@ -212,11 +212,11 @@ class AdminController extends Controller {
         $pageIdx = !array_key_exists($pageParam, $_GET)
             ? 1 : $_GET[$pageParam];
         $perPage = Settings::PER_PAGE;
-        $params = ['context' => Settings::NC_CTX];
+        $params = [];
 
         $q = $this->container
-        ->get('sga.admin.filter')
-        ->from($em,$class,Settings::LIMIT,0,$params);
+            ->get('sga.admin.filter')
+            ->from($em,$class,Settings::LIMIT,0,$params);
 
         // $fanta = $this->container
         //     ->get('sga.admin.table.pagination')
