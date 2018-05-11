@@ -4,7 +4,6 @@
             <th>Código #</th>
             <th>Nome</th>
             <th>Perfil</th>
-            <th>Departamento</th>
             <th>Criado em</th>
             <th>Criado por</th>                                
             <th></th>
@@ -22,11 +21,6 @@
                 <td>
                     {% if entity.profile %}
                         {{ entity.profile.name }}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if entity.entity %}
-                        {{ entity.entity.name }}
                     {% endif %}
                 </td>
                 <td>
