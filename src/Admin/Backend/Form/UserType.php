@@ -28,15 +28,6 @@ class UserType extends AbstractType {
                     false => 'Inativo'
                 ),
             ))
-            // ->add('password_confir', 'password')
-            ->add('entity', 'entity', array(
-                'class' => 'BackendBundle:AppEntity',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                    ->orderBy('u.name', 'ASC');
-                },
-                'choice_label' => 'name'
-            ))
             ->add('profile', 'entity', array(
                 'class' => 'BackendBundle:Profile',
                 'query_builder' => function (EntityRepository $er) {

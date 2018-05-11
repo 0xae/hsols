@@ -35,15 +35,6 @@
 
 <div class="col-md-6">
     <div class="form-group">
-        <label>Departamento</label>
-        {{ form_widget(form.entity, {
-            'attr' : {
-                'disabled' : is_edit and not (is_granted(expression('"ROLE_ADMIN" in user.getRoles()')))
-            }
-        }) }}
-    </div>
-
-    <div class="form-group">
         <label>Perfil</label>
         {{ form_widget(form.profile, {
             'attr' : {
