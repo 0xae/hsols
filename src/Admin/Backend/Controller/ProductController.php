@@ -4,6 +4,7 @@ namespace Admin\Backend\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Admin\Backend\Entity\Upload;
 
 use Admin\Backend\Entity\Product;
 use Admin\Backend\Form\ProductType;
@@ -60,7 +61,8 @@ class ProductController extends Controller {
 
         return $this->render('BackendBundle:Product:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
+            'upload_form' => $upload_form
         ));
     }
 
@@ -71,13 +73,12 @@ class ProductController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Product $entity)
-    {
+    private function createCreateForm(Product $entity) {
+        $entity->setAnnexReference(md5(uniqid()));
         $form = $this->createForm(new ProductType(), $entity, array(
             'action' => $this->generateUrl('administration_Product_create'),
             'method' => 'POST',
         ));
-
         return $form;
     }
 
@@ -88,11 +89,13 @@ class ProductController extends Controller {
     public function newAction()
     {
         $entity = new Product();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
+        $upload_form = new Upload;
+        $upload_form->setReference($entity->getAnnexReference());
 
         return $this->render('BackendBundle:Product:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -100,10 +103,8 @@ class ProductController extends Controller {
      * Finds and displays a Product entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BackendBundle:Product')->find($id);
 
         if (!$entity) {
@@ -122,11 +123,11 @@ class ProductController extends Controller {
      * Displays a form to edit an existing Product entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BackendBundle:Product')->find($id);
+        $upload_form = new Upload;
+        $upload_form->setReference($entity->getAnnexReference());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Product entity.');
@@ -136,9 +137,10 @@ class ProductController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendBundle:Product:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'upload_form' => $upload_form
         ));
     }
 

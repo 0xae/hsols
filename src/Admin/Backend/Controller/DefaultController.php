@@ -27,7 +27,12 @@ class DefaultController extends Controller {
 			$em->flush();
 		}
 
-		return $this->render('BackendBundle:Home:dashboard.html.twig', array(
+		$template='BackendBundle:Home:dashboard.html.twig';
+		if ($this->getUser()->getProfile()->getId() == 2) {
+			$template='BackendBundle:Home:dashboard-client.html.twig';
+		}
+
+		return $this->render($template, array(
 			"month" => $month,
 			"globalCounters" => $this->getGlobalCounts()
 		));
