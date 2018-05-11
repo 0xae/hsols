@@ -35,6 +35,13 @@ class Product {
     /**
      * @var string
      *
+     * @ORM\Column(name="annex_reference", type="text", nullable=true)
+     */
+    private $annexReference;   
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="picture", type="text", nullable=true)
      */
     private $picture;
@@ -78,6 +85,14 @@ class Product {
      * 
      */
     private $createdBy;
+
+    public function getAnnexReference(){
+        return $this->annexReference;
+    }
+
+    public function setAnnexReference($annexReference){
+        $this->annexReference = $annexReference;
+    }
 
     public function getId(){
         return $this->id;

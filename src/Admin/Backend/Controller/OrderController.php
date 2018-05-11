@@ -37,12 +37,12 @@ class OrderController extends Controller {
             'paginate' => $fanta
         ));
     }
+
     /**
      * Creates a new Order entity.
      *
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Order();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -97,10 +97,8 @@ class OrderController extends Controller {
      * Finds and displays a Order entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BackendBundle:Order')->find($id);
 
         if (!$entity) {
@@ -122,7 +120,6 @@ class OrderController extends Controller {
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BackendBundle:Order')->find($id);
 
         if (!$entity) {

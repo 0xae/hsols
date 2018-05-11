@@ -12,6 +12,7 @@
         </li>
 
         {#  Administracao / Parametrizacao #}
+        {% if app.user.profile.id == 1 %}
         <li class="header {{ app.request.attributes.get("_route") == 'backend_administration_main' ? 'active' : '' }}" style="padding:0px;">
             <a href="javascript:void(0)" class="bg-norm" style="font-weight: bold">
                 <img src="{{ asset('icons/admin.svg') }}" width="25" />
@@ -40,6 +41,7 @@
                 </li>
             </ul>
         </li>
+        {% endif %}
 
         {# STOCK #}
         <li class="header tree-view" style="padding:0px;">
@@ -49,15 +51,26 @@
             </a>
 
             <ul class="treeview-menu" style="">
-                <li>
-                    <a href="{{ path('administration_Product_new') }}">
+                {% if app.user.profile.id == 1 %}
+                    <li>
+                        <a href="{{ path('administration_Product_new') }}">
+                            <svg id="meter" class="circle-html5" 
+                                fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                                <circle r="4" cx="50%" cy="50%"></circle>
+                            </svg>
+                            <span>Registro</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('administration_Product') }}">
                         <svg id="meter" class="circle-html5" 
                             fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
                             <circle r="4" cx="50%" cy="50%"></circle>
                         </svg>
-                        <span>Registro</span>
-                    </a>
-                </li>
+                        <span>Listagem</span></a>
+                    </li>
+                {% endif %}
 
                 <li>
                     <a href="{{ path('administration_Product') }}">
@@ -65,16 +78,7 @@
                         fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
                         <circle r="4" cx="50%" cy="50%"></circle>
                     </svg>
-                    <span>Listagem</span></a>
-                </li>
-
-                <li>
-                    <a href="{{ path('administration_Product') }}">
-                    <svg id="meter" class="circle-html5" 
-                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
-                        <circle r="4" cx="50%" cy="50%"></circle>
-                    </svg>
-                    <span>Cat&aacutel;logo</span></a>
+                    <span>Cat&aacute;logo</span></a>
                 </li>
             </ul> 
         </li>
@@ -87,6 +91,7 @@
             </a>
 
             <ul class="treeview-menu" style="">
+                {% if app.user.profile.id == 1 %}
                 <li>
                     <a href="{{ path('administration_Order_new') }}">
                         <svg id="meter" class="circle-html5" 
@@ -105,6 +110,7 @@
                     </svg>
                     <span>Listagem</span></a>
                 </li>
+                {% endif %}
 
                 <li>
                     <a href="{{ path('administration_Order') }}">
@@ -117,12 +123,10 @@
             </ul> 
         </li>
 
-
         <li style="padding:0px;">
         </li>
       </ul>
     </section>
     <!-- /.sidebar -->
-
 
   </aside>

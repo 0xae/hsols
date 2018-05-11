@@ -47,7 +47,7 @@
         <label>Perfil</label>
         {{ form_widget(form.profile, {
             'attr' : {
-                'disabled' : is_edit and not (is_granted(expression('"ROLE_ADMIN" in user.getRoles()')))
+                'disabled' : is_edit and not (app.user.profile.id != 1)
             }
         }) }}
     </div>

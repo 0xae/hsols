@@ -21,6 +21,7 @@ class ProductType extends AbstractType {
             ->add('obs')
             ->add('createdAt')
             ->add('createdBy')
+            ->add('annexReference')
             ->add('submit', 'submit', array(
                 'label' => 'Enviar',
                 'attr' => array(
