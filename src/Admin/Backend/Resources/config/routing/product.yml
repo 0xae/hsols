@@ -10,6 +10,10 @@ administration_Product_new:
     path:     /new
     defaults: { _controller: "BackendBundle:Product:new" }
 
+administration_Product_catalog:
+    path:     /catalog
+    defaults: { _controller: "BackendBundle:Product:catalog" }
+
 administration_Product_create:
     path:     /create
     defaults: { _controller: "BackendBundle:Product:create" }

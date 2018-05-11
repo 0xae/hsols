@@ -20,6 +20,7 @@ class ProductController extends Controller {
      *
      */
     public function indexAction() {
+        $this->checkAccess();
         $em = $this->getDoctrine()->getManager();
         $pageIdx = !array_key_exists('page', $_GET) ? 1 : $_GET['page'];
         $perPage = 10;
@@ -41,10 +42,46 @@ class ProductController extends Controller {
     }
 
     /**
+     * Lists all Product entities.
+     *
+     */
+    public function catalogAction() {
+        $this->checkAccess();
+        $em = $this->getDoctrine()->getManager();
+        $pageIdx = !array_key_exists('page', $_GET) ? 1 : $_GET['page'];
+        $perPage = 10;
+
+        $q = $this->container
+            ->get('sga.admin.filter')
+            ->from($em, Product::class, $perPage, ($pageIdx-1)*$perPage);
+
+        $fanta = $this->container
+            ->get('sga.admin.table.pagination')
+            ->fromQuery($q, $perPage, $pageIdx);
+
+        $entities = $q->getResult();
+        foreach ($entities as $ent) {
+            $pic = $em->getRepository('BackendBundle:Upload')->findBy([
+                'reference' => $ent->getAnnexReference()
+            ]);
+
+            if ($pic) {
+                $ent->setPicture($pic[0]->getFilename());
+            }
+        } 
+
+        return $this->render('BackendBundle:Product:catalog.html.twig', array(
+            'entities' => $entities,
+            'paginate' => $fanta
+        ));
+    }
+
+    /**
      * Creates a new Product entity.
      *
      */
     public function createAction(Request $request) {
+        $this->checkAccess();
         $entity = new Product();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -65,6 +102,12 @@ class ProductController extends Controller {
             'form' => $form->createView(),
             'upload_form' => $upload_form
         ));
+    }
+
+    private function checkAccess() {
+        if ($this->getUser()->getProfile()->getId() != 1) {
+            throw new Exception("Acess denied");
+        }
     }
 
     /**
@@ -88,6 +131,7 @@ class ProductController extends Controller {
      *
      */
     public function newAction() {
+        $this->checkAccess();
         $entity = new Product();
         $form = $this->createCreateForm($entity);
 
@@ -133,6 +177,7 @@ class ProductController extends Controller {
      *
      */
     public function editAction($id) {
+        $this->checkAccess();
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BackendBundle:Product')->find($id);
 

@@ -72,3 +72,21 @@ div.permission-block select {
     background-color: #00a65a;
     color: #fff;
 }
+
+.app-card .thumbnail .caption h3 {
+    margin: 0; 
+    height: 80px;
+    overflow-y: hidden;
+}
+
+.app-card .thumbnail img {
+    margin: 0;  
+    background-color: #ccc;
+    width: 100%;
+    height: 200px;
+}
+
+.app-card {
+    height: 400px;
+    overflow-y: hidden;
+}
