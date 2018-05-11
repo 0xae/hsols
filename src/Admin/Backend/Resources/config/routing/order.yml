@@ -2,6 +2,10 @@ administration_Order:
     path:     /
     defaults: { _controller: "BackendBundle:Order:index" }
 
+administration_Order_my:
+    path:     /my_orders
+    defaults: { _controller: "BackendBundle:Order:myOrders" }
+
 administration_Order_show:
     path:     /{id}/show
     defaults: { _controller: "BackendBundle:Order:show" }

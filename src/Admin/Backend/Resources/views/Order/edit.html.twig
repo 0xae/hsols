@@ -7,7 +7,11 @@
                     <div class="box-header">
                         <h3 class="box-title">Editar Order</h3>
                         <p>
-                            <a href="{{ path('administration_Order') }}">
+                            {% if app.user.profile.id == 1%}
+                                <a href="{{ path('administration_Order') }}">
+                            {% else %}
+                                <a href="{{ path('administration_Order_my') }}">
+                            {% endif %}
                                 <span class="glyphicon glyphicon-back"></span> Voltar
                             </a>
                         </p>
@@ -15,7 +19,7 @@
                     <!-- /.box-header -->
 
                     <div class="box-body no-padding">
-                                                {{ include('BackendBundle:Order:form.html.twig', {'form' : edit_form}) }}
+                        {{ include('BackendBundle:Order:form.html.twig', {'form' : edit_form}) }}
                     </div>
                     <!-- /.box-body -->
                 </div>

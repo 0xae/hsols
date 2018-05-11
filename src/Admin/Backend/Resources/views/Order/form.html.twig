@@ -8,7 +8,7 @@
                 {{ form_widget(form.product) }}
             </div>
             
-            <div class="form-group {% if not is_granted('ROLE_ADMIN') %} hidden {% endif %}">
+            <div class="form-group {% if app.user.profile.id != 1 %} hidden {% endif %}">
                 <label>Cliente</label>
                 {{ form_widget(form.customer) }}
             </div>

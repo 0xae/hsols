@@ -18,6 +18,10 @@ class OrderController extends Controller {
      *
      */
     public function indexAction() {
+        if ($this->getUser()->getProfile()->getId() != 1) {
+            return $this->redirect($this->generateUrl('administration_Order_my', array()));
+        }
+
         $em = $this->getDoctrine()->getManager();
         $pageIdx = !array_key_exists('page', $_GET) ? 1 : $_GET['page'];
         $perPage = 10;
@@ -33,6 +37,30 @@ class OrderController extends Controller {
         $entities = $q->getResult();         
 
         return $this->render('BackendBundle:Order:index.html.twig', array(
+            'entities' => $entities,
+            'paginate' => $fanta
+        ));
+    }
+
+
+    public function myOrdersAction() {
+        $em = $this->getDoctrine()->getManager();
+        $pageIdx = !array_key_exists('page', $_GET) ? 1 : $_GET['page'];
+        $perPage = 10;
+
+        $q = $this->container
+            ->get('sga.admin.filter')
+            ->from($em, Order::class, $perPage, ($pageIdx-1)*$perPage, [
+                'createdBy' => $this->getUser()->getId()
+            ]);
+
+        $fanta = $this->container
+            ->get('sga.admin.table.pagination')
+            ->fromQuery($q, $perPage, $pageIdx);
+
+        $entities = $q->getResult();         
+
+        return $this->render('BackendBundle:Order:my-orders.html.twig', array(
             'entities' => $entities,
             'paginate' => $fanta
         ));
