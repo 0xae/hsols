@@ -1,8 +1,12 @@
 {{ form_start(form) }}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="form-group">
+                {{ include('BackendBundle:Upload:ajax-form.html.twig', {
+                        'form' : upload_form
+                    })
+                }}
             </div>
             <div class="form-group">
                 <label>Nome</label>

@@ -17,7 +17,7 @@ class UploadType extends AbstractType {
             ->add('reference')
             ->add('context')
             ->add('file', 'file', array(
-                    'label' => 'Anexar documento',
+                    'label' => 'Foto do produto',
                     'required' => true,
                 )
             )

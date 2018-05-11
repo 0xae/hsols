@@ -5,6 +5,7 @@ namespace Admin\Backend\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Admin\Backend\Entity\Upload;
+use Admin\Backend\Form\UploadType;
 
 use Admin\Backend\Entity\Product;
 use Admin\Backend\Form\ProductType;
@@ -86,17 +87,25 @@ class ProductController extends Controller {
      * Displays a form to create a new Product entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Product();
         $form = $this->createCreateForm($entity);
-        $upload_form = new Upload;
-        $upload_form->setReference($entity->getAnnexReference());
 
         return $this->render('BackendBundle:Product:new.html.twig', array(
             'entity' => $entity,
             'form' => $form->createView(),
+            'upload_form' => $this->uploadForm($entity)
         ));
+    }
+
+    private function uploadForm($model) {
+        $entity = new Upload();
+        $entity->setReference($model->getAnnexReference());
+
+        return $this->createForm(new UploadType(), $entity, array(
+                'action' => $this->generateUrl('administration_Upload_create'),
+                'method' => 'POST',
+            ))->createView();
     }
 
     /**
@@ -114,7 +123,7 @@ class ProductController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendBundle:Product:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -126,8 +135,6 @@ class ProductController extends Controller {
     public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BackendBundle:Product')->find($id);
-        $upload_form = new Upload;
-        $upload_form->setReference($entity->getAnnexReference());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Product entity.');
@@ -140,7 +147,7 @@ class ProductController extends Controller {
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'upload_form' => $upload_form
+            'upload_form' => $this->uploadForm($entity),
         ));
     }
 
