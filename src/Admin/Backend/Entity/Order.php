@@ -83,6 +83,10 @@ class Order {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);
     }
 
+    public function getTotalFmt() {
+        return ($this->quantity * $this->getProduct()->getPrice() ) . '$00';
+    }
+
     public function getId(){
         return $this->id;
     }
