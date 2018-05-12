@@ -226,7 +226,6 @@ class ProductController extends Controller {
             'action' => $this->generateUrl('administration_Product_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
-
         return $form;
     }
 

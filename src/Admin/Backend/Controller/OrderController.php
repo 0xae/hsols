@@ -159,10 +159,27 @@ class OrderController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        $tpl='BackendBundle:Order:show.html.twig';
+        if ($this->getUser()->getProfile()->getId() == 1) {
+            $tpl='BackendBundle:Order:show-admin.html.twig';
+        }
 
-        return $this->render('BackendBundle:Order:show.html.twig', array(
-            'entity'      => $entity,
+        return $this->render($tpl, array(
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    public function billingAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('BackendBundle:Order')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Order entity.');
+        }
+
+        return $this->render('BackendBundle:Order:billing.html.twig', array(
+            'entity' => $entity
         ));
     }
 

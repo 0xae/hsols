@@ -14,6 +14,10 @@ administration_Order_new:
     path:     /new
     defaults: { _controller: "BackendBundle:Order:new" }
 
+administration_Order_billing:
+    path:     /{id}/billing
+    defaults: { _controller: "BackendBundle:Order:billing" }
+
 administration_Order_create:
     path:     /create
     defaults: { _controller: "BackendBundle:Order:create" }

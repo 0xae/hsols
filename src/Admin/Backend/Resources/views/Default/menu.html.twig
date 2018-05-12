@@ -112,34 +112,33 @@
                 </li>
 
                 {% if app.user.profile.id == 1 %}
-                <li>
-                    <a href="{{ path('administration_Order') }}">
-                    <svg id="meter" class="circle-html5" 
-                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
-                        <circle r="4" cx="50%" cy="50%"></circle>
-                    </svg>
-                    <span>Listagem</span></a>
-                </li>
+                    <li>
+                        <a href="{{ path('administration_Order') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Listagem</span></a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('administration_Order_my') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Meus Pedidos</span></a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('administration_Order_my') }}">
+                        <svg id="meter" class="circle-html5" 
+                            fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
+                            <circle r="4" cx="50%" cy="50%"></circle>
+                        </svg>
+                        <span>Hist&oacute;rico</span></a>
+                    </li>
                 {% endif %}
-
-                <li>
-                    <a href="{{ path('administration_Order_my') }}">
-                    <svg id="meter" class="circle-html5" 
-                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
-                        <circle r="4" cx="50%" cy="50%"></circle>
-                    </svg>
-                    <span>Meus Pedidos</span></a>
-                </li>
-
-                <li>
-                    <a href="{{ path('administration_Order_my') }}">
-                    <svg id="meter" class="circle-html5" 
-                        fill={{ app.request.attributes.get("_route") == 'backend_administration_nc_listing' ? '#00a65a' : '#ccc' }}>
-                        <circle r="4" cx="50%" cy="50%"></circle>
-                    </svg>
-                    <span>Hist&oacute;rico</span></a>
-                </li>
-
             </ul> 
         </li>
 
