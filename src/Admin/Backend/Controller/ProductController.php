@@ -176,9 +176,17 @@ class ProductController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $pic = $em->getRepository('BackendBundle:Upload')->findBy([
+            'reference' => $entity->getAnnexReference()
+        ]);
+
+        if (!empty($pic)) {
+            $entity->setPicture($pic[0]->getFilename());
+        }
+
         return $this->render('BackendBundle:Product:show.html.twig', array(
             'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
