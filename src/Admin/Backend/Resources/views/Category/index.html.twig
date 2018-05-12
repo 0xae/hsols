@@ -6,13 +6,12 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Listagem de Category</h3>
+                    <h3 class="box-title">Categorias</h3>
 
                     <div class="box-tools">
                         <a class="btn btn-primary" 
                         href="{{ path('administration_Category_new') }}">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Criar Category
+                            Criar Categoria
                         </a>
                     </div>
                 </div>
@@ -21,33 +20,48 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover table-striped">
                         <thead>
-                            <tr>                                        <th>ID#</th>
-                                    <th>Name</th><th>Createdat</th><th>Createdby</th>                                <th></th>
+                            <tr>                             
+                                <th>ID#</th>
+                                <th>Nome</th>
+                                <th class="text-center">Criado por</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for entity in entities %}
-                                <tr>                                                                                    <td>
-                                                <a href="{{ path('administration_Category_show', { 'id': entity.id }) }}">
-                                                #{{ entity.id }}
-                                                </a>
-                                            </td>                                                                                    <td>{{ entity.name }}</td>                                                                                    <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>                                                                                    <td>{{ entity.createdBy }}</td>                                            <td><a href="{{ path('administration_Category_edit', { 'id': entity.id }) }}">
-<span class="badge badge-primary">
-        EDITAR
-</span>
-</a>
-                                            </td>                                </tr>
+                                <tr>           
+                                    <td>
+                                        <a href="{{ path('administration_Category_show', { 'id': entity.id }) }}">
+                                        #{{ entity.id }}
+                                        </a>
+                                    </td>   
+                                    <td>{{ entity.name }}</td>  
+                                    <td class="text-center">
+                                        {{entity.createdBy.name}} 
+                                        <br/>
+                                        {{ entity.createdAt|date('Y-m-d') }}
+                                    </td>
+                                    <td><a href="{{ path('administration_Category_edit', { 'id': entity.id }) }}">
+                                        <span class="badge badge-primary">
+                                                EDITAR
+                                        </span>
+                                        </a>
+                                    </td>   
+                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-
-                    {% if entities %}
-                        {{ pagerfanta(paginate, 'twitter_bootstrap3') }}
-                    {% endif %}
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
+
+            {% if entities %}
+                {{ pagerfanta(paginate, 'twitter_bootstrap3', {
+                    'next_message': 'Proximo',
+                    'prev_message': 'Anterior'
+                    }) }}
+            {% endif %}
         </div>
     </div>
 

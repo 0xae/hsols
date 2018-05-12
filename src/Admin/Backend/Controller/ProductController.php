@@ -8,6 +8,7 @@ use Admin\Backend\Entity\Upload;
 use Admin\Backend\Form\UploadType;
 
 use Admin\Backend\Entity\Product;
+use Admin\Backend\Entity\Category;
 use Admin\Backend\Form\ProductType;
 
 /**
@@ -37,7 +38,8 @@ class ProductController extends Controller {
 
         return $this->render('BackendBundle:Product:index.html.twig', array(
             'entities' => $entities,
-            'paginate' => $fanta
+            'paginate' => $fanta,
+            'categories' => $em->getRepository('BackendBundle:Category')->findAll()
         ));
     }
 
@@ -46,14 +48,20 @@ class ProductController extends Controller {
      *
      */
     public function catalogAction() {
-        $this->checkAccess();
         $em = $this->getDoctrine()->getManager();
         $pageIdx = !array_key_exists('page', $_GET) ? 1 : $_GET['page'];
         $perPage = 10;
+        $filterCat=1;
+
+        $params = [];
+        if (@$_GET['category']) {
+            $params['category']=$_GET['category'];
+            $filterCat=$_GET['category'];
+        }
 
         $q = $this->container
             ->get('sga.admin.filter')
-            ->from($em, Product::class, $perPage, ($pageIdx-1)*$perPage);
+            ->from($em, Product::class, $perPage, ($pageIdx-1)*$perPage, $params);
 
         $fanta = $this->container
             ->get('sga.admin.table.pagination')
@@ -72,7 +80,9 @@ class ProductController extends Controller {
 
         return $this->render('BackendBundle:Product:catalog.html.twig', array(
             'entities' => $entities,
-            'paginate' => $fanta
+            'paginate' => $fanta,
+            'categoryFilter' => $filterCat,
+            'categories' => $em->getRepository('BackendBundle:Category')->findAll()
         ));
     }
 
@@ -147,9 +157,9 @@ class ProductController extends Controller {
         $entity->setReference($model->getAnnexReference());
 
         return $this->createForm(new UploadType(), $entity, array(
-                'action' => $this->generateUrl('administration_Upload_create'),
-                'method' => 'POST',
-            ))->createView();
+            'action' => $this->generateUrl('administration_Upload_create'),
+            'method' => 'POST',
+        ))->createView();
     }
 
     /**
@@ -203,8 +213,7 @@ class ProductController extends Controller {
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Product $entity)
-    {
+    private function createEditForm(Product $entity) {
         $form = $this->createForm(new ProductType(), $entity, array(
             'action' => $this->generateUrl('administration_Product_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -217,10 +226,9 @@ class ProductController extends Controller {
      * Edits an existing Product entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
+        $this->checkAccess();
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('BackendBundle:Product')->find($id);
 
         if (!$entity) {
@@ -243,12 +251,13 @@ class ProductController extends Controller {
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Product entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
+        $this->checkAccess();
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -274,8 +283,7 @@ class ProductController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('administration_Product_delete', array('id' => $id)))
             ->setMethod('DELETE')

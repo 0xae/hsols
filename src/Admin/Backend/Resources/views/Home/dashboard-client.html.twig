@@ -4,52 +4,24 @@
 
 <div ng-controller="StatisticsController">
     <div class="row">
-        <div class="col-md-3">
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>00</h3>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-thumbs-up"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    Cat&aacute;logo
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="small-box bg-blue">
                 <div class="inner">
-                    <h3>00</h3>
+                    <h3>{{ counters['product_count'] }}</h3>
                 </div>
                 <div class="icon">
                     <i class="fa fa-thumbs-up"></i>
                 </div>
-                <a href="#" class="small-box-footer">
-                    Meus Pedidos
+                <a href="{{path('administration_Product_catalog')}}" class="small-box-footer">
+                    Ver Catálogo
                 </a>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>00</h3>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-thumbs-up"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    Pedidos entregues
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>00</h3>
+                    <h3>{{ counters['pending_orders'] }}</h3>
                 </div>
                 <div class="icon">
                     <i class="fa fa-thumbs-up"></i>
@@ -60,13 +32,60 @@
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ counters['sent_orders'] }}</h3>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-thumbs-up"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Pedidos entregues
+                </a>
+            </div>
+        </div>
 
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
+                    <h3 class="title">Últimos Pedidos</h3>
                 </div>
                 <div class="box-body no-padding">
-                    <div id="by_month"></div>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>                                  
+                                <th>C&Oacute;DIGO #</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Total</th>
+                                <th>Data</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entity in orders %}
+                                <tr>        
+                                    <td>
+                                        <a href="{{ path('administration_Order_edit', { 'id': entity.id }) }}">
+                                        #{{ entity.code }}
+                                        </a>
+                                    </td> 
+                                    <td>{{ entity.product.name }}</td>                                     
+                                    <td>{{ entity.quantity }}</td>                                     
+                                    <td>{{ entity.totalFmt }}</td>                                          
+                                    <td>{{ entity.createdAt|date('Y-m-d H:i:s') }}</td>                                            
+                                    <td>
+                                        <a href="{{ path('administration_Order_show', { 'id': entity.id }) }}">
+                                            <span class="badge badge-success">
+                                            VER PEDIDO
+                                            </span>
+                                        </a>
+                                    </td>
+                               </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

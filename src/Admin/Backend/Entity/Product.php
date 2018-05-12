@@ -32,6 +32,7 @@ class Product {
      */
     private $description;    
 
+
     /**
      * @var string
      *
@@ -85,6 +86,24 @@ class Product {
      * 
      */
     private $createdBy;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
+     * })
+     * 
+     */
+    private $category;
+
+    public function getCategory(){
+        return $this->category;
+    }
+
+    public function setCategory($category){
+        $this->category = $category;
+    }
 
     public function getAnnexReference(){
         return $this->annexReference;

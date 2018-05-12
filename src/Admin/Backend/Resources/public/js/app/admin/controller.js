@@ -150,4 +150,17 @@ angular.module("app")
             $.notify("A operacao nao pode ser efectuada.Tente novamente!", "danger");            
         });
     }
+}])
+
+.controller('CatalogController', ['$http', '$scope', function ($http, $scope) {
+    console.info('catalog controller');    
+    $scope.setCategory= function(cat) {
+        $scope.category=cat;        
+        console.info(cat);
+    }
+
+    $scope.onCategoryChange = function (rootUrl) {
+        var url=rootUrl + '?category=' + $scope.category;
+        window.location.href = url;
+    }
 }]);

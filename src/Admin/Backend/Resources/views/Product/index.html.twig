@@ -24,8 +24,9 @@
                                 <th>C&Oacute;DIGO #</th>
                                 <th>Nome</th>
                                 <th>Descri&ccedil;&atilde;o</th>
+                                <th>Categoria</th>
                                 <th class="text-center">Pre&ccedil;o</th>
-                                <th  class="text-center">Criado por</th>
+                                <th class="text-center">Criado por</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -40,6 +41,7 @@
 
                                     <td>{{ entity.name }}</td>
                                     <td>{{ entity.descriptionFmt }}</td>
+                                    <td>{{ entity.category.name }}</td>
                                     <td class="text-center">
                                         {{ entity.price }}$00
                                         <br/> 

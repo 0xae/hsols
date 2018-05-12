@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class Order {
+    const PENDING='pendente';
+    const SENT='enviado';
+    const RECEIVED='recebido';
+    const CANCELLED='cancelado';
+
     /**
      * @var integer
      *
@@ -78,6 +83,22 @@ class Order {
      * 
      */
     private $createdBy;
+
+    public function isPending() {
+        return $this->status == self::PENDING;
+    }
+
+    public function isSent() {
+        return $this->status == self::SENT;
+    }
+
+    public function isReceived() {
+        return $this->status == self::RECEIVED;
+    }
+
+    public function isCancelled() {
+        return $this->status == self::CANCELLED;
+    }
 
     public function getCode() {
         return str_pad($this->id, 5, '0', STR_PAD_LEFT);

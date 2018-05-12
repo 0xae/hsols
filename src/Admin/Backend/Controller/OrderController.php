@@ -15,7 +15,6 @@ use Admin\Backend\Form\OrderType;
 class OrderController extends Controller {
     /**
      * Lists all Order entities.
-     *
      */
     public function indexAction() {
         if ($this->getUser()->getProfile()->getId() != 1) {
@@ -91,18 +90,23 @@ class OrderController extends Controller {
 
     /**
      * Creates a new Order entity.
-     *
      */
     public function createAction(Request $request) {
         $entity = new Order();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $prod = false;
+
+        if (@$_GET['product']) {
+            // $prod = 
+        }
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $userId = $this->getUser();
             $entity->setCreatedBy($userId);
             $entity->setCreatedAt(new \DateTime);
+            $entity->setStatus(Order::PENDING);
             $em->persist($entity);
             $em->flush();
 
@@ -111,7 +115,8 @@ class OrderController extends Controller {
 
         return $this->render('BackendBundle:Order:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
+            'prod' => $prod
         ));
     }
 
@@ -119,7 +124,6 @@ class OrderController extends Controller {
      * Creates a form to create a Order entity.
      *
      * @param Order $entity The entity
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Order $entity) {
@@ -133,7 +137,6 @@ class OrderController extends Controller {
 
     /**
      * Displays a form to create a new Order entity.
-     *
      */
     public function newAction() {
         $entity = new Order();
@@ -146,7 +149,6 @@ class OrderController extends Controller {
 
     /**
      * Finds and displays a Order entity.
-     *
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -166,10 +168,8 @@ class OrderController extends Controller {
 
     /**
      * Displays a form to edit an existing Order entity.
-     *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('BackendBundle:Order')->find($id);
 
@@ -191,7 +191,6 @@ class OrderController extends Controller {
     * Creates a form to edit a Order entity.
     *
     * @param Order $entity The entity
-    *
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Order $entity) {
@@ -207,7 +206,6 @@ class OrderController extends Controller {
 
     /**
      * Edits an existing Order entity.
-     *
      */
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
@@ -233,12 +231,12 @@ class OrderController extends Controller {
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Order entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -261,11 +259,9 @@ class OrderController extends Controller {
      * Creates a form to delete a Order entity by id.
      *
      * @param mixed $id The entity id
-     *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('administration_Order_delete', array('id' => $id)))
             ->setMethod('DELETE')

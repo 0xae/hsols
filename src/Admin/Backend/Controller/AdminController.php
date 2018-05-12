@@ -19,6 +19,7 @@ use Admin\Backend\Entity\ProfilePermission;
  */
 class AdminController extends Controller {
     public function indexAction() {
+        $this->checkAccess();
         $em = $this->getDoctrine()->getManager();
         $userForm = $this->createUserForm();
         $profileForm = $this->createProfileForm();
@@ -56,7 +57,13 @@ class AdminController extends Controller {
         ));
     }
 
-   /**
+    private function checkAccess() {
+        if ($this->getUser()->getProfile()->getId() != 1) {
+            throw new Exception("Acess denied");
+        }
+    }
+
+    /**
      * Fetches all permissions of a profile
      * @param User $entity The entity
      * @return \Symfony\Component\Form\Form The form

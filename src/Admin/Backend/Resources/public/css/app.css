@@ -90,3 +90,18 @@ div.permission-block select {
     height: 400px;
     overflow-y: hidden;
 }
+
+.btn {
+    font-weight: bold;
+}
+
+.notfound {
+    font-weight: bold;
+    color: gray;
+}
+
+.price {
+    font-weight: bold;
+    color: #666;
+    font-size: 16px;
+}

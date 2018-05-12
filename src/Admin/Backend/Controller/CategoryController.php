@@ -78,8 +78,7 @@ class CategoryController extends Controller {
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
+        $form->add('submit', 'submit', array('label' => 'Enviar', 'attr'=>['class'=>'btn btn-success']));
         return $form;
     }
 
