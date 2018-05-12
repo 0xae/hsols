@@ -57,7 +57,11 @@
         <li class="header tree-view" style="padding:0px;">
             <a href="javascript:void(0)" class="bg-norm" style="text-transform: uppercase;font-weight: bold"> {# lazy #}
                 <img src="{{ asset('icons/compbook.svg') }}" width="25" />
+                {% if app.user.profile.id == 1 %}
                 STOCK
+                {% else %}
+                CAT&Aacute;LOGO
+                {% endif %}
             </a>
 
             <ul class="treeview-menu" style="">
