@@ -47,9 +47,18 @@ class UploadController extends Controller {
         $entity = new Upload();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $old = $em->getRepository('BackendBundle:Upload')->findBy([
+                'reference' => $entity->getReference()
+            ]);
+
+            foreach ($old as $result) {
+                $em->remove($result);
+            }
+            $em->flush();
+
             $userId = $this->getUser();
             $entity->setCreatedBy($userId);
             $entity->setContext(Settings::NC_CTX);
