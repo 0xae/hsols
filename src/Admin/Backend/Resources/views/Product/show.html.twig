@@ -19,7 +19,9 @@
                 </a>
                 <br/>
                 {% if app.user.profile.id ==1 %}
-                    <span style="margin-top: 10px;" class="btn btn-success">EDITAR</span>
+                    <a style="margin-top: 10px;" 
+                        href="{{ path('administration_Product_edit', {'id':entity.id}) }}"
+                        class="btn btn-success">EDITAR</a>
                 {% endif %}
               </div>
             </div>
