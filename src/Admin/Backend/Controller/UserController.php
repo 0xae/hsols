@@ -223,18 +223,18 @@ class UserController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            if ($_oldRules != $entity->getProfile()->getId()) {
-                $oldRoles = $this->getRoles($_oldRules);
-                $newRoles = $this->getRoles($entity->getProfile()->getId());
+            // if ($_oldRules != $entity->getProfile()->getId()) {
+            //     $oldRoles = $this->getRoles($_oldRules);
+            //     $newRoles = $this->getRoles($entity->getProfile()->getId());
                 
-                foreach ($oldRoles as $role) {
-                    $entity->removeRole($role);                    
-                }
+            //     foreach ($oldRoles as $role) {
+            //         $entity->removeRole($role);                    
+            //     }
                 
-                foreach ($newRoles as $role) {
-                    $entity->addRole($role);
-                }
-            }
+            //     foreach ($newRoles as $role) {
+            //         $entity->addRole($role);
+            //     }
+            // }
 
             $entity->setUserName($oldUsername);
             if (!$entity->getCreatedBy()) {
